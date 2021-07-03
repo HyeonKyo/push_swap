@@ -57,40 +57,18 @@ char	*merge_input(int ac, char **av)
 	return (str);
 }
 
-// int	arr_len(char *str)
-// {
-// 	int		i;
-// 	int		len;
-// 	char	sp;
-
-// 	i = 0;
-// 	len = 0;
-// 	sp = ' ';
-// 	while (str[i])
-// 	{
-// 		if (str[i] == sp)
-// 			i++;
-// 		if (str[i] == 0)
-// 			break ;
-// 		while (ft_isdigit(str[i]))
-// 			i++;
-// 		len++;
-// 	}
-// 	return (len);
-// }
-
-t_list	*insert_data(char *str, int *len)
+t_deque	*insert_data(char *str)
 {
 	int		i;
 	int		num;
 	char	sp;
-	t_list	*head;
-	t_list	*cur;
+	t_deque	*deq;
 
 	i = 0;
 	sp = ' ';
-	head = create_list();
-	cur = head;
+	deq = create_deque();
+	if (deq == 0)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == sp)
@@ -100,62 +78,66 @@ t_list	*insert_data(char *str, int *len)
 		num = 0;
 		while (ft_isdigit(str[i]))
 			num = num * 10 + (str[i++] - '0');
-		cur->data = num;
+		fillin_deque(deq, num);
 	}
-	return (arr);
+	free(str);
+	return (deq);
 }
 
-int	*check_dup_num(char *str, int *len)
+t_deque	*check_dup_num(char *str)
 {
-	int	i;
-	int	j;
-	int	*arr;
+	int		ck_num;
+	t_list	*cur;
+	t_list	*tmp;
+	t_deque	*deq;
 
-	arr = change_type(str, len);
-	free(str);
-	if (arr == 0)
+	deq = insert_data(str);
+	if (deq == 0)
 		return (0);
-	i = -1;
-	while (++i + 1 < *len)
+	cur = deq->header;
+	while (cur)
 	{
-		j = i + 1;
-		while (j < *len)
+		ck_num = cur->data;
+		tmp = cur->next;
+		while (tmp)
 		{
-			if (arr[i] == arr[j++])
+			if (tmp->data == ck_num)
 			{
-				free(arr);
+				clear_deque(deq);
 				return (0);
 			}
+			tmp = tmp->next;
 		}
+		cur = cur->next;
 	}
-	return (arr);
+	return (deq);
 }
 
-int	*check_input(int ac, char **av)
+t_deque	*check_input(int ac, char **av)
 {
 	char	*str;
-	int		len;
-	int		*arr;
+	t_deque	*deq;
 
 	if (!check_insert(ac, av))
 		return (0);
 	str = merge_input(ac, av);
 	if (str == 0)
 		return (0);
-	len = 0;
-	arr = check_dup_num(str, &len);
-	if (arr == 0)
+	deq = check_dup_num(str);
+	if (deq == 0)
 		return (0);
-	return (arr);
+	return (deq);
 }
 
 int	main(int ac, char **av)
 {
-	int	i;
+	int		i;
+	t_deque	*deq;
 
 	if (ac <= 2)//ac = 2 -> 숫자 1개 들어옴 -> 아무 명령도 출력 x
 		return (0);
-	if (!merge_input(ac, av))
+	deq = check_input(ac, av);
+	if (deq == 0)
 		return (0);
 	join();
 	sort();
