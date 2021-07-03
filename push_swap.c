@@ -1,5 +1,7 @@
 #include "ft_utils.h"
 #include "ft_type.h"
+#include "list.h"
+#include <stdio.h>
 //1. 숫자와 스페이스만 있는지
 //2. 숫자가 하나라도 있는지
 int	check_insert(int ac, char **argv)
@@ -8,7 +10,7 @@ int	check_insert(int ac, char **argv)
 	int	j;
 	int	fg;
 
-	i = -1;
+	i = 0;
 	while (++i < ac)
 	{
 		j = 0;
@@ -26,6 +28,8 @@ int	check_insert(int ac, char **argv)
 			else
 				return (0);
 		}
+		if (fg == 0)
+			return (0);
 	}
 	return (1);
 }
@@ -41,14 +45,13 @@ char	*merge_input(int ac, char **av)
 	char	*str;
 	char	*tmp;
 
-	i = 3;
-	str = 0;
+	i = 2;
 	str = ft_strjoin(av[1], av[2]);
-	while (i <= ac)
+	while (++i < ac)
 	{
 		tmp = ft_strdup(str);
 		free(str);
-		str = strjoin(tmp, av[i + 1]);
+		str = ft_strjoin(tmp, av[i]);
 		if (tmp)
 			free(tmp);
 		if (str == 0)
@@ -71,7 +74,7 @@ t_deque	*insert_data(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (str[i] == sp)
+		while (str[i] == sp)
 			i++;
 		if (str[i] == 0)
 			break ;
@@ -79,6 +82,7 @@ t_deque	*insert_data(char *str)
 		while (ft_isdigit(str[i]))
 			num = num * 10 + (str[i++] - '0');
 		fillin_deque(deq, num);
+		printf("------5------\n");
 	}
 	free(str);
 	return (deq);
@@ -94,11 +98,13 @@ t_deque	*check_dup_num(char *str)
 	deq = insert_data(str);
 	if (deq == 0)
 		return (0);
+	printf("------1------\n");
 	cur = deq->header;
 	while (cur)
 	{
 		ck_num = cur->data;
 		tmp = cur->next;
+		printf("------2------\n");
 		while (tmp)
 		{
 			if (tmp->data == ck_num)
@@ -109,6 +115,7 @@ t_deque	*check_dup_num(char *str)
 			tmp = tmp->next;
 		}
 		cur = cur->next;
+		printf("------3------\n");
 	}
 	return (deq);
 }
@@ -120,12 +127,15 @@ t_deque	*check_input(int ac, char **av)
 
 	if (!check_insert(ac, av))
 		return (0);
+	printf("---------\n");
 	str = merge_input(ac, av);
 	if (str == 0)
 		return (0);
+	printf("---------\n");
 	deq = check_dup_num(str);
 	if (deq == 0)
 		return (0);
+	printf("---------\n");
 	return (deq);
 }
 
@@ -133,12 +143,22 @@ int	main(int ac, char **av)
 {
 	int		i;
 	t_deque	*deq;
+	t_list	*cur;
 
 	if (ac <= 2)//ac = 2 -> 숫자 1개 들어옴 -> 아무 명령도 출력 x
 		return (0);
 	deq = check_input(ac, av);
 	if (deq == 0)
 		return (0);
-	join();
-	sort();
+	cur = deq->header;
+	printf("---------\n");
+	while (cur)
+	{
+		printf("%d ", cur->data);
+		cur = cur->next;
+	}
+	printf("\n");
+	// join();
+	// sort();
+	return (0);
 }

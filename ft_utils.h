@@ -4,6 +4,9 @@
 # include <stdlib.h>
 
 //utils1
+int	ft_isdigit(int c);
+int	ft_isspace(int c);
+size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *src);
 
