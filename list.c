@@ -74,3 +74,25 @@ void	clear_deque(t_deque *deq)
 	}
 	free(deq);
 }
+
+void	del_top_node(t_deque *deq)
+{
+	t_list	*tmp;
+
+	tmp = deq->top;
+	deq->top = deq->top->next;
+	free(tmp);
+	deq->top->prev = 0;
+	return ;
+}
+
+void	del_bottom_node(t_deque *deq)
+{
+	t_list	*tmp;
+
+	tmp = deq->bot;
+	deq->bot = deq->bot->prev;
+	free(tmp);
+	deq->bot->next = 0;
+	return ;
+}

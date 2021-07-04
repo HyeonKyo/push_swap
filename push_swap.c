@@ -19,12 +19,12 @@ int	vaild_input(char *argv, int *fg)
 		else if (argv[i++] == '-')
 		{
 			if (!ft_isdigit(argv[i]))
-				return (0);
+				return (0);//에러메시지 출력되면 error로
 			else
 				*fg = 1;
 		}
 		else
-			return (0);
+			error();
 	}
 	return (1);
 }
@@ -40,7 +40,7 @@ int	check_insert(int ac, char **argv)
 	{
 		fg = 0;
 		if (!vaild_input(argv[i], &fg))
-			return (0);
+			return (0);//위 함수가 전부 exit종료면 if문 제거
 		if (fg == 0)
 			return (0);
 	}
@@ -67,7 +67,7 @@ char	*merge_input(int ac, char **av)
 		str = ft_strjoin(tmp, av[i]);
 		if (tmp)
 			free(tmp);
-		if (str == 0)
+		if (str == 0)//말락에러
 			return (0);
 	}
 	return (str);
@@ -96,10 +96,7 @@ int	ps_atoi(int *idx, int sign, char *str, t_deque *deq)
 	}
 	num = num * sign;
 	if (len > 10 || num < -2147483648 || num > 2147483647)
-	{
-		clear_deque(deq);
-		return (0);
-	}
+		error();
 	fillin_deque(deq, (int)num);
 	return (1);
 }
@@ -126,8 +123,7 @@ t_deque	*insert_data(char *str)
 			sign = -1;
 			i++;
 		}
-		if (!ps_atoi(&i, sign, str, deq))
-			return (0);
+		ps_atoi(&i, sign, str, deq);
 	}
 	free(str);
 	return (deq);

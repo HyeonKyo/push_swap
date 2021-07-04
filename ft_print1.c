@@ -3,4 +3,5 @@
 void	error(void)
 {
 	write(2, "Error", 6);
+	exit(1);
 }

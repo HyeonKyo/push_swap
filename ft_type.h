@@ -23,4 +23,17 @@ typedef struct	s_deque
 	t_list	*bot;
 }				t_deque;
 
+typedef struct	s_cd_lst
+{
+	char	*cmd;
+	struct s_cd_lst	*next;
+}				t_cd_lst;
+
+typedef struct	s_cd_deq
+{
+	int		size;
+	t_cd_lst	*head;
+	t_cd_lst	*last;
+}				t_cd_deq;
+
 #endif

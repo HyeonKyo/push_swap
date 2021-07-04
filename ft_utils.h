@@ -11,4 +11,7 @@ char	*ft_strdup(const char *src);
 
 //utils2
 void	*ft_memset(void *ptr, int value, size_t num);
+
+//print1
+void	error(void);
 #endif

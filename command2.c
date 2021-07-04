@@ -1,0 +1,49 @@
+#include "ft_utils.h"
+#include "ft_type.h"
+#include "list.h"
+
+void	ra(t_deque *deq_A, t_cd_deq *cmd_list)
+{
+	t_list	*cur;
+
+	cur = create_list();
+	deq_A->bot->next = cur;
+	cur->prev = deq_A->bot;
+	cur->data = deq_A->top->data;
+	del_top_node(deq_A);
+	deq_A->bot = cur;
+	add_command(2, "ra", cmd_list);
+}
+
+void	rb(t_deque *deq_B, t_cd_deq *cmd_list)
+{
+	t_list	*cur;
+
+	cur = create_list();
+	deq_B->bot->next = cur;
+	cur->prev = deq_B->bot;
+	cur->data = deq_B->top->data;
+	del_top_node(deq_B);
+	deq_B->bot = cur;
+	add_command(2, "ra", cmd_list);
+}
+
+void	rr(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list)
+{
+	t_list	*cur;
+
+	cur = create_list();
+	deq_A->bot->next = cur;
+	cur->prev = deq_A->bot;
+	cur->data = deq_A->top->data;
+	del_top_node(deq_A);
+	deq_A->bot = cur;
+	cur = create_list();
+	deq_B->bot->next = cur;
+	cur->prev = deq_B->bot;
+	cur->data = deq_B->top->data;
+	del_top_node(deq_B);
+	deq_B->bot = cur;
+	add_command(2, "rr", cmd_list);
+}
+	
