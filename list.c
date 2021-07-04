@@ -46,34 +46,17 @@ void	fillin_deque(t_deque *deq, int num)
 	deq->size++;
 }
 
-t_deque	*dup_deque(t_deque *deq)
+t_deque	*create_deque_B(int size)
 {
 	//deq_A와 길이는 같고, 데이터는 0이 들어간 덱 생성
-	t_list	*dst;
-	t_list	*src;
-	t_list	*tmp;
-	t_deque	*dup;
+	t_deque	*deq_B;
 
-	dup = (t_deque *)malloc(sizeof(t_deque));
-	if (dup == 0)
+	deq_B = create_deque();
+	if (deq_B == 0)
 		return (0);
-	dup->top = create_list();
-	dst = dup->top;
-	src = deq->top->next;
-	dst->data = 0;
-	dup->size = 1;
-	while (src)
-	{
-		dst->next = create_list();
-		tmp = dst;
-		dst = dst->next;
-		dst->prev = tmp;
-		dst->data = 0;
-		dup->size++;
-		src = src->next;
-	}
-	dup->bot = dst;
-	return (dup);
+	while (deq_B->size < size)
+		fillin_deque(deq_B, 0);
+	return (deq_B);
 }
 
 void	clear_deque(t_deque *deq)

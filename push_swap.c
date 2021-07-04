@@ -178,15 +178,16 @@ t_deque	*check_input(int ac, char **av)
 	return (deq);
 }
 
-int	make_stack(int ac, char **av, t_deque *deq_A, t_deque *deq_B)
+int	make_stack(int ac, char **av, t_deque **deq_A, t_deque **deq_B)
 {
-	deq_A = check_input(ac, av);
-	if (deq_A == 0)
+	*deq_A = check_input(ac, av);
+	if (*deq_A == 0)
 		return (0);
-	deq_B = dup_deque(deq_A);
-	if (deq_B == 0)
+	*deq_B = create_deque_B((*deq_A)->size);
+	printf("----1---\n");
+	if (*deq_B == 0)
 	{
-		clear_deque(deq_A);
+		clear_deque(*deq_A);
 		return (0);
 	}
 	return (1);
@@ -201,19 +202,19 @@ int	main(int ac, char **av)
 
 	if (ac <= 2)//ac = 2 -> 숫자 1개 들어옴 -> 아무 명령도 출력 x
 		return (1);
-	if (!make_stack(ac, av, deq_A, deq_B))
+	if (!make_stack(ac, av, &deq_A, &deq_B))
 		return (1);
 	//sort(deq_A, deq_B);
-	printf("----1---\n");
 	cur = deq_A->top;
-	printf("----3---\n");
+	printf("B->size : %d\n", deq_B->size);
+	printf("B->top : %p\n", deq_B->top);
+	printf("B->bot : %p\n", deq_B->bot);
 	cur_B = deq_B->top;
-	printf("----3---\n");
 	while (cur)
 	{
-		printf("----2---\n");
-		printf("A: %d ", cur->data);
-		printf("B: %d ", cur_B->data);
+		printf("----3---\n");
+		printf("\nA: %d\n", cur->data);
+		printf("B: %d\n", cur_B->data);
 		cur = cur->next;
 		cur_B = cur_B->next;
 	}

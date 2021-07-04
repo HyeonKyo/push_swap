@@ -6,7 +6,7 @@
 t_list	*create_list(void);
 t_deque	*create_deque(void);
 void	fillin_deque(t_deque *deq, int num);
-t_deque	*dup_deque(t_deque *deq);
+t_deque	*create_deque_B(int size);
 void	clear_deque(t_deque *deq);
 
 #endif
