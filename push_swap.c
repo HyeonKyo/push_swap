@@ -4,6 +4,31 @@
 #include <stdio.h>
 //1. 숫자와 스페이스만 있는지
 //2. 숫자가 하나라도 있는지
+int	vaild_input(char *argv, int *fg)
+{
+	int	i;
+
+	i = -1;
+	while (argv[++i])
+	{
+		if (ft_isdigit(argv[i]) || argv[i] == ' ')
+		{
+			if (ft_isdigit(argv[i]))
+				*fg = 1;
+		}
+		else if (argv[i++] == '-')
+		{
+			if (!ft_isdigit(argv[i]))
+				return (0);
+			else
+				*fg = 1;
+		}
+		else
+			return (0);
+	}
+	return (1);
+}
+
 int	check_insert(int ac, char **argv)
 {
 	int	i;
@@ -13,21 +38,9 @@ int	check_insert(int ac, char **argv)
 	i = 0;
 	while (++i < ac)
 	{
-		j = 0;
 		fg = 0;
-		if (argv[i][j] == 0)
+		if (!vaild_input(argv[i], &fg))
 			return (0);
-		while (argv[i][j])
-		{
-			if (ft_isdigit(argv[i][j]) || ft_isspace(argv[i][j]))
-			{
-				if (ft_isdigit(argv[i][j]))
-					fg = 1;
-				j++;
-			}
-			else
-				return (0);
-		}
 		if (fg == 0)
 			return (0);
 	}
@@ -60,29 +73,61 @@ char	*merge_input(int ac, char **av)
 	return (str);
 }
 
+unsigned int	absol(int n)
+{
+	if (n < 0)
+		return (n * -1);
+	return (n);
+}
+
+int	ps_atoi(int *idx, int sign, char *str, t_deque *deq)
+{
+	long long	num;
+	int			len;
+
+	num = 0;
+	len = 0;
+	if (str[*idx] == 0)
+		return (1);
+	while (ft_isdigit(str[*idx]))
+	{
+		len++;
+		num = num * 10 + (absol(str[(*idx)++]) - '0');
+	}
+	num = num * sign;
+	if (len > 10 || num < -2147483648 || num > 2147483647)
+	{
+		clear_deque(deq);
+		return (0);
+	}
+	fillin_deque(deq, (int)num);
+	return (1);
+}
+
 t_deque	*insert_data(char *str)
 {
 	int		i;
-	int		num;
-	char	sp;
+	int		sign;
 	t_deque	*deq;
 
 	i = 0;
-	sp = ' ';
 	deq = create_deque();
 	if (deq == 0)
 		return (0);
 	while (str[i])
 	{
-		while (str[i] == sp)
+		while (str[i] == ' ')
 			i++;
 		if (str[i] == 0)
 			break ;
-		num = 0;
-		while (ft_isdigit(str[i]))
-			num = num * 10 + (str[i++] - '0');
-		fillin_deque(deq, num);
-		printf("------5------\n");
+		sign = 1;
+		if (str[i] == '-')
+		{
+			sign = -1;
+			i++;
+		}
+		if (!ps_atoi(&i, sign, str, deq))
+			return (0);
 	}
 	free(str);
 	return (deq);
@@ -98,13 +143,11 @@ t_deque	*check_dup_num(char *str)
 	deq = insert_data(str);
 	if (deq == 0)
 		return (0);
-	printf("------1------\n");
-	cur = deq->header;
+	cur = deq->top;
 	while (cur)
 	{
 		ck_num = cur->data;
 		tmp = cur->next;
-		printf("------2------\n");
 		while (tmp)
 		{
 			if (tmp->data == ck_num)
@@ -115,7 +158,6 @@ t_deque	*check_dup_num(char *str)
 			tmp = tmp->next;
 		}
 		cur = cur->next;
-		printf("------3------\n");
 	}
 	return (deq);
 }
@@ -127,38 +169,58 @@ t_deque	*check_input(int ac, char **av)
 
 	if (!check_insert(ac, av))
 		return (0);
-	printf("---------\n");
 	str = merge_input(ac, av);
 	if (str == 0)
 		return (0);
-	printf("---------\n");
 	deq = check_dup_num(str);
 	if (deq == 0)
 		return (0);
-	printf("---------\n");
 	return (deq);
+}
+
+int	make_stack(int ac, char **av, t_deque *deq_A, t_deque *deq_B)
+{
+	deq_A = check_input(ac, av);
+	if (deq_A == 0)
+		return (0);
+	deq_B = dup_deque(deq_A);
+	if (deq_B == 0)
+	{
+		clear_deque(deq_A);
+		return (0);
+	}
+	return (1);
 }
 
 int	main(int ac, char **av)
 {
-	int		i;
-	t_deque	*deq;
+	t_deque	*deq_A;
+	t_deque	*deq_B;
 	t_list	*cur;
+	t_list	*cur_B;
 
 	if (ac <= 2)//ac = 2 -> 숫자 1개 들어옴 -> 아무 명령도 출력 x
-		return (0);
-	deq = check_input(ac, av);
-	if (deq == 0)
-		return (0);
-	cur = deq->header;
-	printf("---------\n");
+		return (1);
+	if (!make_stack(ac, av, deq_A, deq_B))
+		return (1);
+	//sort(deq_A, deq_B);
+	printf("----1---\n");
+	cur = deq_A->top;
+	printf("----3---\n");
+	cur_B = deq_B->top;
+	printf("----3---\n");
 	while (cur)
 	{
-		printf("%d ", cur->data);
+		printf("----2---\n");
+		printf("A: %d ", cur->data);
+		printf("B: %d ", cur_B->data);
 		cur = cur->next;
+		cur_B = cur_B->next;
 	}
-	printf("\n");
-	// join();
-	// sort();
+	printf("----3---\n");
+	printf("\nA_size: %d\n", deq_A->size);
+	printf("\nB_size: %d\n", deq_B->size);
+	clear_deque(deq_A);
+	clear_deque(deq_B);
 	return (0);
 }

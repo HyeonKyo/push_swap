@@ -8,14 +8,6 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-int	ft_isspace(int c)
-{
-	if (c == ' ')
-		return (1);
-	else
-		return (0);
-}
-
 size_t	ft_strlen(const char *str)
 {
 	int	i;

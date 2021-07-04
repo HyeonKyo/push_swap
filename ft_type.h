@@ -19,8 +19,8 @@ typedef struct	s_list
 typedef struct	s_deque
 {
 	int		size;
-	t_list	*header;
-	t_list	*tailer;
+	t_list	*top;
+	t_list	*bot;
 }				t_deque;
 
 #endif
