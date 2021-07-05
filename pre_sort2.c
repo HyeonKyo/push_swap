@@ -1,6 +1,7 @@
 #include "ft_type.h"
 #include "ft_utils.h"
 #include "list.h"
+#include "push_swap.h"
 
 void	insert_queue(t_ll num, t_queue *queue[10], int q_num)
 {
@@ -11,30 +12,12 @@ void	insert_queue(t_ll num, t_queue *queue[10], int q_num)
 	else
 	{
 		cur = (t_qu_lst *)malloc(sizeof(t_qu_lst));
+		ft_memset(cur, 0, sizeof(t_qu_lst));
 		queue[q_num]->last->next = cur;
 		queue[q_num]->last = queue[q_num]->last->next;
 	}
 	queue[q_num]->last->data = num;
 	queue[q_num]->size++;
-}
-
-void	clear_queue(t_queue *queue[10])
-{
-	int	i;
-	t_qu_lst	*cur;
-	t_qu_lst	*tmp;
-
-	i = 0;
-	while (i < 10)
-	{
-		cur = queue[i]->fst;
-		while (cur)
-		{
-			tmp = cur->next;
-			free(cur);
-			cur = tmp;
-		}
-	}
 }
 
 void	putin_data(t_deque *deq, t_sort *repo, t_ll bios)
@@ -57,10 +40,12 @@ void	pull_queue(t_sort *repo, t_queue *queue[10])
 	int	j;
 	t_qu_lst	*cur;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	while (i < 10)
+	while (++i < 10)
 	{
+		if (queue[i] == 0)
+			continue ;
 		cur = queue[i]->fst;
 		while (cur)
 		{
@@ -70,14 +55,37 @@ void	pull_queue(t_sort *repo, t_queue *queue[10])
 	}
 }
 
+void	clear_queue(t_queue *queue[10])
+{
+	int	i;
+	t_qu_lst	*cur;
+	t_qu_lst	*tmp;
+
+	i = -1;
+	while (++i < 10)
+	{
+		if (queue[i] == 0)
+			continue ;
+		cur = queue[i]->fst;
+		while (cur)
+		{
+			tmp = cur->next;
+			free(cur);
+			cur = tmp;
+		}
+		free(queue[i]);
+		queue[i] = 0;
+	}
+}
+
 void	sorting(t_sort *repo, t_ll bios, int dg)
 {
 	int	i;
 	int	last;
 	static t_queue	*queue[10];
 
-	i = 0;
-	while (i < repo->size)
+	i = -1;
+	while (++i < repo->size)
 	{
 		last = return_last_num(repo->arr[i], dg);
 		insert_queue(repo->arr[i], queue, last);

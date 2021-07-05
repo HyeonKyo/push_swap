@@ -13,6 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include <stdlib.h>
+#include <stdio.h>
 //input1
 void	vaild_input(char *argv, int *fg);
 void	check_insert(int ac, char **argv);
@@ -38,7 +39,22 @@ void	rra(t_deque *deq_A, t_cd_deq *cmd_list);
 void	rrb(t_deque *deq_B, t_cd_deq *cmd_list);
 void	rrr(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list);
 
-//pre_sort
+//pre_sort1
+int	check_stack(t_deque *deq, int base, int *max, int *min);
+t_sort	*make_repo(int len);
+int		find_digit(t_ll num);
+int		return_last_num(long long n, int dg);
+void	make_queue(t_queue *queue[10], int idx);
+//pre_sort2
+void	insert_queue(t_ll num, t_queue *queue[10], int q_num);
+void	clear_queue(t_queue *queue[10]);
+void	putin_data(t_deque *deq, t_sort *repo, t_ll bios);
+void	pull_queue(t_sort *repo, t_queue *queue[10]);
+void	sorting(t_sort *repo, t_ll bios, int dg);
+//pre_sort3
+void	before_bios(t_sort *repo, t_ll bios);
+void	radix_sort(t_deque *deq, t_sort *repo, t_ll bios, int max);
+void	pre_sort(t_deque *deq, int base, t_pivot *piv);
 
 
 //pre_sort_utils

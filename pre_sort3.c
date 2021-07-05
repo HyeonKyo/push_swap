@@ -2,6 +2,7 @@
 #include "ft_utils.h"
 #include "list.h"
 #include "push_swap.h"
+#include <stdio.h>
 
 void	before_bios(t_sort *repo, t_ll bios)
 {
@@ -30,6 +31,7 @@ void	pre_sort(t_deque *deq, int base, t_pivot *piv)
 	int	max;
 	int	min;
 	int	len;
+	int	i = 0;
 	t_ll	bios;
 	t_sort	*repo;
 
@@ -39,6 +41,9 @@ void	pre_sort(t_deque *deq, int base, t_pivot *piv)
 	if (min < 0)
 		bios = -1 * min;
 	radix_sort(deq, repo, bios, max);
+	printf("size : %d\n", len);
+	while (i < repo->size)
+		printf("arr : %lld\n", repo->arr[i++]);
 	//choose_pivot(piv, repo);
 	//clear_repo();
 }

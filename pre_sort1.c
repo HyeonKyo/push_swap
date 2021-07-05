@@ -1,6 +1,7 @@
 #include "ft_type.h"
 #include "ft_utils.h"
 #include "list.h"
+#include "push_swap.h"
 
 int	check_stack(t_deque *deq, int base, int *max, int *min)
 {
@@ -10,7 +11,7 @@ int	check_stack(t_deque *deq, int base, int *max, int *min)
 	*max = -2147483648;
 	*min = 2147483647;
 	cur = deq->top;
-	len = 0;
+	len = 1;
 	while (cur)
 	{
 		if (cur->data == base)//기준 값 포함하지 않을 때
@@ -20,6 +21,7 @@ int	check_stack(t_deque *deq, int base, int *max, int *min)
 		if (cur->data < *min)
 			*min = cur->data;
 		len++;
+		cur = cur->next;
 	}
 	return (len);
 }
