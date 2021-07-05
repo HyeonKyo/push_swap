@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_type.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkki <hyeonkki@student.42.kr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/05 14:42:28 by hyeonkki          #+#    #+#             */
+/*   Updated: 2021/07/05 14:42:28 by hyeonkki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_TYPE_H
 # define FT_TYPE_H
 # include <stdlib.h>
@@ -35,5 +47,17 @@ typedef struct	s_cd_deq
 	t_cd_lst	*head;
 	t_cd_lst	*last;
 }				t_cd_deq;
+
+typedef struct	s_qu_lst
+{
+	long long	*data;
+	struct s_qu_lst	*next;
+}				t_qu_lst;
+
+typedef struct	s_queue
+{
+	t_qu_lst	*head;
+	t_qu_lst	*last;
+}				t_queue;
 
 #endif

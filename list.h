@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkki <hyeonkki@student.42.kr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/05 14:42:48 by hyeonkki          #+#    #+#             */
+/*   Updated: 2021/07/05 14:42:49 by hyeonkki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIST_H
 # define LIST_H
 # include <stdlib.h>
@@ -15,7 +27,7 @@ void	del_bottom_node(t_deque *deq);
 //list_cmd
 char	*new_str(int size, const char *str);
 t_cd_lst	*create_cd_list(void);
-void	add_command(int len, const char *str, t_cd_deq *cmd_list)
+void	add_command(int len, const char *str, t_cd_deq *cmd_list);
 
 
 #endif

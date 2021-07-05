@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utils.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkki <hyeonkki@student.42.kr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/05 14:42:31 by hyeonkki          #+#    #+#             */
+/*   Updated: 2021/07/05 14:42:32 by hyeonkki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_UTILS_H
 # define FT_UTILS_H
 # include <unistd.h>
@@ -14,4 +26,5 @@ void	*ft_memset(void *ptr, int value, size_t num);
 
 //print1
 void	error(void);
+void	merror(void);
 #endif

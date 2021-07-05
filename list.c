@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyeonkki <hyeonkki@student.42.kr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/05 14:42:43 by hyeonkki          #+#    #+#             */
+/*   Updated: 2021/07/05 14:42:44 by hyeonkki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_type.h"
 #include "ft_utils.h"
 #include "list.h"
@@ -9,7 +21,7 @@ t_list	*create_list(void)
 
 	lst = (t_list *)malloc(sizeof(t_list));
 	if (lst == 0)
-		return (0);
+		merror();
 	ft_memset(lst, 0, sizeof(t_list));
 	return (lst);
 }
@@ -20,7 +32,7 @@ t_deque	*create_deque(void)
 
 	deq = (t_deque *)malloc(sizeof(t_deque));
 	if (deq == 0)
-		return (0);
+		merror();
 	ft_memset(deq, 0, sizeof(t_deque));
 	deq->top = create_list();
 	deq->bot = 0;
@@ -42,7 +54,7 @@ void	fillin_deque(t_deque *deq, int num)
 	deq->bot->next = create_list();
 	deq->bot = deq->bot->next;
 	deq->bot->prev = tmp;
-	deq->bot->data = num;	
+	deq->bot->data = num;
 	deq->size++;
 }
 
@@ -52,8 +64,6 @@ t_deque	*create_deque_B(int size)
 	t_deque	*deq_B;
 
 	deq_B = create_deque();
-	if (deq_B == 0)
-		return (0);
 	while (deq_B->size < size)
 		fillin_deque(deq_B, 0);
 	return (deq_B);
