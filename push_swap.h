@@ -38,4 +38,11 @@ void	rra(t_deque *deq_A, t_cd_deq *cmd_list);
 void	rrb(t_deque *deq_B, t_cd_deq *cmd_list);
 void	rrr(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list);
 
+//pre_sort
+
+
+//pre_sort_utils
+t_sort	*make_repo(int len);
+
+
 #endif

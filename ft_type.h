@@ -14,6 +14,8 @@
 # define FT_TYPE_H
 # include <stdlib.h>
 
+typedef long long	t_ll;
+
 typedef	struct	s_pivot
 {
 	int	big;
@@ -50,14 +52,21 @@ typedef struct	s_cd_deq
 
 typedef struct	s_qu_lst
 {
-	long long	*data;
+	t_ll	data;
 	struct s_qu_lst	*next;
 }				t_qu_lst;
 
 typedef struct	s_queue
 {
-	t_qu_lst	*head;
+	int	size;
+	t_qu_lst	*fst;
 	t_qu_lst	*last;
 }				t_queue;
+
+typedef struct	s_sort
+{
+	int	size;
+	t_ll	*arr;
+}				t_sort;	
 
 #endif

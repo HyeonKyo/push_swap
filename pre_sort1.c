@@ -2,63 +2,70 @@
 #include "ft_utils.h"
 #include "list.h"
 
-/*
-가장 큰 pre_sort함수 (덱, 기준값)
+int	check_stack(t_deque *deq, int base, int *max, int *min)
 {
-	변수 : bios, digit, max, min
-1. 덱에서 선정렬할 블록 길이 재고, max, min값 측정하는 함수
-인자 : 덱, 기준값, max주소, min주소 / 초기min값은 정수 최대, max는 정수 최소값
-리턴 : len
-변수 : len, cur
-cur을 이용해 덱의 top부터 반복문 돌면서
-데이터와 min, max를 비교하며 바꿔주고
-len++(len 초기값 = 0)
-len리턴
+	int	len;
+	t_list	*cur;
 
-2. 구조체 안의 정수형 배열에 len만큼 할당.
-			size에 len을 넣어줌.
-
-3. min값이 음수라면 bios = min x -1
-				digit = max + bios의 자리수
-
-4. radix_sort(덱, 구조체 배열, bios, digit)
-{
-	배열에 덱의 data + bios를 넣어줌.
-	i = 1부터
-	while i <= digit
-		sorting(배열, bios, i(현재 자릿수))
-}
-
-4.5 n번째 자릿수 리턴 함수(long long n, dg)
-{
-	i = 1
-	while (i < dg)
-		n / 10;
-	return (n % 10)
-}
-
-5. sorting
-{
-	qu0~9까지 선언
-	i선언
-
-	while 배열의 끝까지
+	*max = -2147483648;
+	*min = 2147483647;
+	cur = deq->top;
+	len = 0;
+	while (cur)
 	{
-		if (str[i] < 3)
-			insert_queue(str[i], qu0, qu1, qu2)
-		else if (str[i] < 6)
-			insert_queue(str[i], qu3, qu4, qu5)
-		else if (str[i] < 6)
-			insert_queue(str[i], qu3, qu4, qu5)
-		else if (str[i] < 6)
-			insert_queue(str[i], qu3, qu4, qu5)
+		if (cur->data == base)//기준 값 포함하지 않을 때
+			break ;
+		if (cur->data > *max)
+			*max = cur->data;
+		if (cur->data < *min)
+			*min = cur->data;
+		len++;
 	}
-
+	return (len);
 }
 
+t_sort	*make_repo(int len)
+{
+	t_sort	*repo;
 
-
-
-
+	repo = (t_sort *)malloc(sizeof(t_sort) * 1);
+	if (repo == 0)
+		merror();
+	repo->arr = (long long *)malloc(sizeof(long long) * len);
+	if (repo->arr == 0)
+		merror();
+	repo->size = len;
+	return (repo);
 }
-*/
+
+int		find_digit(t_ll num)
+{
+	int	digit;
+
+	digit = 0;
+	while (num > 0)
+	{
+		num = num / 10;
+		digit++;
+	}
+	return (digit);
+}
+
+int		return_last_num(long long n, int dg)
+{
+	int	i;
+
+	i = 0;
+	while (++i < dg)
+		n /= 10;
+	return ((int)(n % 10));
+}
+
+void	make_queue(t_queue *queue[10], int idx)
+{
+	queue[idx] = (t_queue *)malloc(sizeof(t_queue));
+	queue[idx]->fst = (t_qu_lst *)malloc(sizeof(t_qu_lst));
+	queue[idx]->last = queue[idx]->fst;
+	queue[idx]->size = 0; 
+	ft_memset(queue[idx]->fst, 0, sizeof(t_qu_lst));
+}
