@@ -26,8 +26,9 @@ void	del_bottom_node(t_deque *deq);
 
 //list_cmd
 char	*new_str(int size, const char *str);
-t_cd_lst	*create_cd_list(void);
-void	add_command(int len, const char *str, t_cd_deq *cmd_list);
+t_cmd_lst	*create_cmd_list(void);
+void	add_command(int len, const char *str, t_cmd_deq *cmd_list);
+void	setup_cmd_list(t_cmd_deq *cmd_list);
 
 
 #endif

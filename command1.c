@@ -14,7 +14,7 @@
 #include "ft_type.h"
 #include "list.h"
 
-void	sa(t_deque *deq_A, t_cd_deq *cmd_list)
+void	sa(t_deque *deq_A, t_cmd_deq *cmd_list)
 {
 	int	tmp;
 
@@ -24,7 +24,7 @@ void	sa(t_deque *deq_A, t_cd_deq *cmd_list)
 	add_command(2, "sa", cmd_list);
 }
 
-void	sb(t_deque *deq_B, t_cd_deq *cmd_list)
+void	sb(t_deque *deq_B, t_cmd_deq *cmd_list)
 {
 	int	tmp;
 
@@ -34,7 +34,7 @@ void	sb(t_deque *deq_B, t_cd_deq *cmd_list)
 	add_command(2, "sb", cmd_list);
 }
 
-void	ss(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list)
+void	ss(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 {
 	int	tmp;
 
@@ -47,7 +47,7 @@ void	ss(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list)
 	add_command(2, "ss", cmd_list);
 }
 
-void	pa(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list)
+void	pa(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 {
 	t_list	*tmp;
 
@@ -60,7 +60,7 @@ void	pa(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list)
 	add_command(2, "pa", cmd_list);
 }
 
-void	pb(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list)
+void	pb(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 {
 	t_list	*tmp;
 

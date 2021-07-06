@@ -13,7 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include <stdlib.h>
-#include <stdio.h>
+#include <stdio.h>//꼭지우기
 //input1
 void	vaild_input(char *argv, int *fg);
 void	check_insert(int ac, char **argv);
@@ -27,17 +27,17 @@ t_deque	*check_input(int ac, char **av);
 void	make_stack(int ac, char **av, t_deque **deq_A, t_deque **deq_B);
 
 //command
-void	sa(t_deque *deq_A, t_cd_deq *cmd_list);
-void	sb(t_deque *deq_B, t_cd_deq *cmd_list);
-void	ss(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list);
-void	pa(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list);
-void	pb(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list);
-void	ra(t_deque *deq_A, t_cd_deq *cmd_list);
-void	rb(t_deque *deq_B, t_cd_deq *cmd_list);
-void	rr(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list);
-void	rra(t_deque *deq_A, t_cd_deq *cmd_list);
-void	rrb(t_deque *deq_B, t_cd_deq *cmd_list);
-void	rrr(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list);
+void	sa(t_deque *deq_A, t_cmd_deq *cmd_list);
+void	sb(t_deque *deq_B, t_cmd_deq *cmd_list);
+void	ss(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list);
+void	pa(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list);
+void	pb(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list);
+void	ra(t_deque *deq_A, t_cmd_deq *cmd_list);
+void	rb(t_deque *deq_B, t_cmd_deq *cmd_list);
+void	rr(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list);
+void	rra(t_deque *deq_A, t_cmd_deq *cmd_list);
+void	rrb(t_deque *deq_B, t_cmd_deq *cmd_list);
+void	rrr(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list);
 
 //pre_sort1
 int	check_stack(t_deque *deq, int base, int *max, int *min);

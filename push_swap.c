@@ -30,7 +30,8 @@ int	main(int ac, char **av)
 		return (1);
 	make_stack(ac, av, &deq_A, &deq_B);
 	pre_sort(deq_A, deq_A->bot->data, &piv);
-	//sort(deq_A, deq_B);
+	printf("sml : %d, big : %d\n", piv.sml, piv.big);
+	//sort(deq_A, deq_B, &piv);
 	clear_deque(deq_A);
 	clear_deque(deq_B);
 	return (0);

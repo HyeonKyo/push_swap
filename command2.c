@@ -14,7 +14,7 @@
 #include "ft_type.h"
 #include "list.h"
 
-void	ra(t_deque *deq_A, t_cd_deq *cmd_list)
+void	ra(t_deque *deq_A, t_cmd_deq *cmd_list)
 {
 	t_list	*cur;
 
@@ -27,7 +27,7 @@ void	ra(t_deque *deq_A, t_cd_deq *cmd_list)
 	add_command(2, "ra", cmd_list);
 }
 
-void	rb(t_deque *deq_B, t_cd_deq *cmd_list)
+void	rb(t_deque *deq_B, t_cmd_deq *cmd_list)
 {
 	t_list	*cur;
 
@@ -40,7 +40,7 @@ void	rb(t_deque *deq_B, t_cd_deq *cmd_list)
 	add_command(2, "ra", cmd_list);
 }
 
-void	rr(t_deque *deq_A, t_deque *deq_B, t_cd_deq *cmd_list)
+void	rr(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 {
 	t_list	*cur;
 

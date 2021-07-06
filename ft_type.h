@@ -37,18 +37,18 @@ typedef struct	s_deque
 	t_list	*bot;
 }				t_deque;
 
-typedef struct	s_cd_lst
+typedef struct	s_cmd_lst
 {
 	char	*cmd;
-	struct s_cd_lst	*next;
-}				t_cd_lst;
+	struct s_cmd_lst	*next;
+}				t_cmd_lst;
 
-typedef struct	s_cd_deq
+typedef struct	s_cmd_deq
 {
 	int		size;
-	t_cd_lst	*head;
-	t_cd_lst	*last;
-}				t_cd_deq;
+	t_cmd_lst	*head;
+	t_cmd_lst	*last;
+}				t_cmd_deq;
 
 typedef struct	s_qu_lst
 {
@@ -67,6 +67,17 @@ typedef struct	s_sort
 {
 	int	size;
 	t_ll	*arr;
-}				t_sort;	
+}				t_sort;
+
+typedef struct	s_base_list
+{
+	int	data;
+	struct	s_base_list	*next;
+}				t_base_list;
+
+typedef struct	s_base
+{
+	t_base_list	*top;
+}				t_base;
 
 #endif
