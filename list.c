@@ -37,6 +37,7 @@ t_deque	*create_deque(void)
 	deq->top = create_list();
 	deq->bot = 0;
 	deq->size = 1;
+	deq->case_num = 1;
 	return (deq);
 }
 
@@ -66,6 +67,7 @@ t_deque	*create_deque_B(int size)
 	deq_B = create_deque();
 	while (deq_B->size < size)
 		fillin_deque(deq_B, 0);
+	deq_B->case_num = 2;
 	return (deq_B);
 }
 

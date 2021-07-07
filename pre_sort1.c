@@ -14,13 +14,15 @@ int	check_stack(t_deque *deq, int base, int *max, int *min)
 	len = 1;
 	while (cur)
 	{
-		if (cur->data == base)//기준 값 포함하지 않을 때
-			break ;
+		if (deq->case_num != 1 && cur->data == base)//기준값 포함x
+		 	break ;
 		if (cur->data > *max)
 			*max = cur->data;
 		if (cur->data < *min)
 			*min = cur->data;
 		len++;
+		if (deq->case_num == 1 && cur->data == base)//기준값 포함
+		 	break ;
 		cur = cur->next;
 	}
 	return (len);

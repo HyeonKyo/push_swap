@@ -78,7 +78,7 @@ void	clear_queue(t_queue *queue[10])
 	}
 }
 
-void	sorting(t_sort *repo, t_ll bios, int dg)
+void	pre_sorting(t_sort *repo, t_ll bios, int dg)
 {
 	int	i;
 	int	last;
