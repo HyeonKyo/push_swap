@@ -32,18 +32,19 @@ void	choose_pivot1(t_pivot *piv, t_sort *repo)
 	int	c;
 	int	tmp;
 
-	
-	tmp = repo->size % 3;
+	tmp = (repo->size - 1) % 3;
 	if (tmp == 0) 
-		a = repo->size / 3;
+		a = (repo->size - 1) / 3;
 	else if (tmp == 1)
-		a = repo->size + 2 / 3;
+		a = ((repo->size - 1) + 2) / 3;
 	else
-		a = repo->size * 2 + 1 / 3;
-	b = (repo->size * 2) / 3;
-	c = repo->size;
-	while (a <= c - b + 1)
+		a = ((repo->size - 1) + 1) / 3;
+	b = ((repo->size - 1) * 2) / 3;
+	c = repo->size - 1;
+	if (b - a > c - b + 1 && a + 1 != b)
 		a++;
+	else if (b - a < c - b + 1 && b - 1 != a)
+		b--;
 	piv->sml = repo->arr[a];
 	piv->big = repo->arr[b];
 }
@@ -53,12 +54,14 @@ void	choose_pivot2(t_pivot *piv, t_sort *repo)
 	int	a;
 	int	b;
 	int	c;
-	
-	a = repo->size / 3;
-	b = (repo->size * 2) / 3;
-	c = repo->size;
-	while (a - 1 < b - a)
+
+	a = (repo->size - 1) / 3;
+	b = ((repo->size - 1) * 2) / 3;
+	c = (repo->size - 1);
+	if (b - a > c - b + 1 && b - 1 != a)
 		b--;
+	else if (a - 1 < b - a && a + 1 != b)
+		a++;
 	piv->sml = repo->arr[a];
 	piv->big = repo->arr[b];
 }
@@ -70,18 +73,19 @@ void	choose_pivot3(t_pivot *piv, t_sort *repo)
 	int	c;
 	int	tmp;
 
-	a = repo->size / 3;
-	tmp = (repo->size * 2) % 3;
+	a = (repo->size - 1) / 3;
+	tmp = ((repo->size - 1) * 2) % 3;
 	if (tmp == 0) 
-		b = repo->size * 2 / 3;
+		b = (repo->size - 1) * 2 / 3;
 	else if (tmp == 1)
-		b = (repo->size * 2 + 2) / 3;
+		b = ((repo->size - 1) * 2 + 2) / 3;
 	else
-		b = (repo->size * 2 + 1) / 3;
-	b++;
-	c = repo->size;
-	while (b - a > c - b + 1)
+		b = ((repo->size - 1) * 2 + 1) / 3;
+	c = (repo->size - 1);
+	if (b - a > a - 1 && a + 1 != b)
 		a++;
+	if (b - a + 1 == c - b && b + 1 != c)
+		b++;
 	piv->sml = repo->arr[a];
 	piv->big = repo->arr[b];
 	//case3 = a > b >== c (b와 c가 같을 수 없을 땐 b가 하나 더 많게)

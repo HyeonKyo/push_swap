@@ -76,6 +76,7 @@ typedef struct	s_base_list
 
 typedef struct	s_base
 {
+	int			last;
 	t_base_list	*top;
 }				t_base;
 
@@ -91,6 +92,6 @@ typedef	struct	s_info
 {
 	t_pivot		piv;
 	t_cmd_deq	*cmd;
-	t_base		base;
+	t_base		*base;
 }				t_info;
 #endif

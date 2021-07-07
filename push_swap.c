@@ -23,15 +23,19 @@ int	main(int ac, char **av)
 	t_deque	*deq_A;
 	t_deque	*deq_B;
 	t_list	*cur;
-	t_list	*cur_B;
-	t_pivot piv;
 
 	if (ac <= 2)//ac = 2 -> 숫자 1개 들어옴 -> 아무 명령도 출력 x
 		return (1);
 	make_stack(ac, av, &deq_A, &deq_B);
-	pre_sort(deq_A, deq_A->bot->data, &piv);
-	printf("sml : %d, big : %d\n", piv.sml, piv.big);
-	//sort(deq_A, deq_B, &piv);
+	//pre_sort(deq_A, deq_A->bot->data, &piv);
+	//printf("sml : %d, big : %d\n", piv.sml, piv.big);
+	sort(deq_A, deq_B);
+	cur = deq_A->top;
+	for (int i = 0; i < deq_A->size; i++)
+	{
+		printf("%d\n", cur->data);
+		cur = cur->next;
+	}
 	clear_deque(deq_A);
 	clear_deque(deq_B);
 	return (0);

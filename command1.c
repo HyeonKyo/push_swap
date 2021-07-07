@@ -51,12 +51,16 @@ void	pa(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 {
 	t_list	*tmp;
 
+	if (deq_B->size <= 0)
+		return ;
 	deq_A->top->prev = create_list();
 	tmp = deq_A->top;
 	deq_A->top = deq_A->top->prev;
 	deq_A->top->next = tmp;
 	deq_A->top->data = deq_B->top->data;
 	del_top_node(deq_B);
+	deq_A->size++;
+	deq_B->size--;
 	add_command(2, "pa", cmd_list);
 }
 
@@ -64,11 +68,15 @@ void	pb(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 {
 	t_list	*tmp;
 
+	if (deq_A->size <= 0)
+		return ;
 	deq_B->top->prev = create_list();
 	tmp = deq_B->top;
 	deq_B->top = deq_B->top->prev;
 	deq_B->top->next = tmp;
 	deq_B->top->data = deq_A->top->data;
 	del_top_node(deq_A);
+	deq_A->size--;
+	deq_B->size++;
 	add_command(2, "pb", cmd_list);
 }

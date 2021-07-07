@@ -92,10 +92,11 @@ void	del_top_node(t_deque *deq)
 	t_list	*tmp;
 
 	tmp = deq->top;
+	if (tmp == 0)
+		return ;
 	deq->top = deq->top->next;
 	free(tmp);
 	deq->top->prev = 0;
-	return ;
 }
 
 void	del_bottom_node(t_deque *deq)

@@ -50,15 +50,25 @@ void	insert_queue(t_ll num, t_queue *queue[10], int q_num);
 void	clear_queue(t_queue *queue[10]);
 void	putin_data(t_deque *deq, t_sort *repo, t_ll bios);
 void	pull_queue(t_sort *repo, t_queue *queue[10]);
-void	sorting(t_sort *repo, t_ll bios, int dg);
+void	pre_sorting(t_sort *repo, t_ll bios, int dg);
 //pre_sort3
 void	before_bios(t_sort *repo, t_ll bios);
 void	radix_sort(t_deque *deq, t_sort *repo, t_ll bios, int max);
 void	pre_sort(t_deque *deq, int base, t_pivot *piv);
 
-
 //pre_sort_utils
 t_sort	*make_repo(int len);
+
+//sort
+void	except_sort(t_deque *deq_A, t_cmd_deq *cmd_list);
+int	divide_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int nbase);
+void	reverse_stack(t_deque *deq_A, t_deque *deq_B, t_info *info, int *cnt);
+void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info);
+void	B_to_A(t_deque *deq_A, t_deque *deq_B, t_info *info);
+int	divide_A(t_deque *deq_A, t_deque *deq_B, t_info *info);
+void	first_sort(t_deque *deq_A, t_deque *deq_B, t_info *info);
+void	q_sort(t_deque *deq_A, t_deque *deq_B, t_info *info);
+void	sort(t_deque *deq_A, t_deque *deq_B);
 
 
 #endif

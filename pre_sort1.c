@@ -14,7 +14,7 @@ int	check_stack(t_deque *deq, int base, int *max, int *min)
 	len = 1;
 	while (cur)
 	{
-		if (deq->case_num != 1 && cur->data == base)//기준값 포함x
+		if (/*deq->case_num != 1 && */cur->data == base)//기준값 포함x
 		 	break ;
 		if (cur->data > *max)
 			*max = cur->data;
