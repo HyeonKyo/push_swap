@@ -19,7 +19,8 @@
 t_list	*create_list(void);
 t_deque	*create_deque(void);
 void	fillin_deque(t_deque *deq, int num);
-t_deque	*create_deque_B(int size);
+//t_deque	*create_deque_B(int size);
+t_deque	*create_deque_B(void);
 void	clear_deque(t_deque *deq);
 void	del_top_node(t_deque *deq);
 void	del_bottom_node(t_deque *deq);
@@ -35,6 +36,5 @@ t_base_list	*create_base_list(void);
 int		pop_base(t_base *base);
 void	push_base(t_base *base, int input);
 void	add_base(t_deque *deq_B, t_info *info, int rb_cnt);
-
 
 #endif

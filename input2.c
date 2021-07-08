@@ -67,5 +67,6 @@ t_deque	*check_input(int ac, char **av)
 void	make_stack(int ac, char **av, t_deque **deq_A, t_deque **deq_B)
 {
 	*deq_A = check_input(ac, av);
-	*deq_B = create_deque_B((*deq_A)->size);
+	*deq_B = (t_deque *)malloc(sizeof(t_deque));
+	ft_memset(*deq_B, 0, sizeof(t_deque));
 }

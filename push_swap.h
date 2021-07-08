@@ -60,10 +60,11 @@ void	pre_sort(t_deque *deq, int base, t_pivot *piv);
 t_sort	*make_repo(int len);
 
 //sort
-void	except_sort(t_deque *deq_A, t_cmd_deq *cmd_list);
-int	divide_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int nbase);
+void	print_deq(t_deque *deq_A, t_deque *deq_B);
+void	except_sort(t_deque *deq_A, int size, t_cmd_deq *cmd_list);
+void	divide_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int nbase);
 void	reverse_stack(t_deque *deq_A, t_deque *deq_B, t_info *info, int *cnt);
-void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info);
+void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int nbase);
 void	B_to_A(t_deque *deq_A, t_deque *deq_B, t_info *info);
 int	divide_A(t_deque *deq_A, t_deque *deq_B, t_info *info);
 void	first_sort(t_deque *deq_A, t_deque *deq_B, t_info *info);

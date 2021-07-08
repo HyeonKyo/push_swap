@@ -36,7 +36,7 @@ void	rrb(t_deque *deq_B, t_cmd_deq *cmd_list)
 	cur->next = deq_B->top;
 	cur->data = deq_B->bot->data;
 	del_bottom_node(deq_B);
-	deq_B->top = deq_B->top->prev;
+	deq_B->top = cur;
 	add_command(3, "rrb", cmd_list);
 }
 
@@ -50,6 +50,7 @@ void	rrr(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 	cur->data = deq_A->bot->data;
 	del_bottom_node(deq_A);
 	deq_A->top = cur;
+	cur = 0;
 	cur = create_list();
 	deq_B->top->prev = cur;
 	cur->next = deq_B->top;

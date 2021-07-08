@@ -30,12 +30,12 @@ int	main(int ac, char **av)
 	//pre_sort(deq_A, deq_A->bot->data, &piv);
 	//printf("sml : %d, big : %d\n", piv.sml, piv.big);
 	sort(deq_A, deq_B);
-	cur = deq_A->top;
-	for (int i = 0; i < deq_A->size; i++)
-	{
-		printf("%d\n", cur->data);
-		cur = cur->next;
-	}
+	// cur = deq_A->top;
+	// for (int i = 0; i < deq_A->size; i++)
+	// {
+	// 	printf("%d\n", cur->data);
+	// 	cur = cur->next;
+	// }
 	clear_deque(deq_A);
 	clear_deque(deq_B);
 	return (0);

@@ -59,16 +59,19 @@ void	fillin_deque(t_deque *deq, int num)
 	deq->size++;
 }
 
-t_deque	*create_deque_B(int size)
+t_deque	*create_deque_B(void)
 {
 	//deq_A와 길이는 같고, 데이터는 0이 들어간 덱 생성
 	t_deque	*deq_B;
 
 	deq_B = create_deque();
-	while (deq_B->size < size)
-		fillin_deque(deq_B, 0);
-	deq_B->case_num = 2;
 	return (deq_B);
+
+	// while (deq_B->size < size)
+	// 	fillin_deque(deq_B, 0);
+	// deq_B->case_num = 2;
+	// deq_B->size = 0;
+	// return (deq_B);
 }
 
 void	clear_deque(t_deque *deq)
