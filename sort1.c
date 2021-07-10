@@ -16,6 +16,48 @@ int		check_already_sorted(t_deque *deq)
 			return (0);
 		cur = cur->next;
 	}
+	return (1);//정렬되있는 상태
+}
+
+int		check_reverse_sorted(t_deque *deq_A, int len)
+{
+	int		i;
+	int		check_num;
+	t_list	*cur;
+
+	if (len < 6)
+		return (0);
+	cur = deq_A->top;
+	check_num = cur->data;
+	i = -1;
+	while (++i < len - 1)
+	{
+		if (check_num < cur->next->data)
+			return (0);
+		check_num = cur->next->data;
+		cur = cur->next;
+	}
+	return (1);
+}
+
+int		sorting_reverse(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd, int len)
+{
+	int		i;
+	t_list	*cur;
+
+	if (!check_reverse_sorted(deq_A, len))
+		return (0);
+	i = -1;
+	while (++i < len - 1)
+	{
+		rra(deq_A, cmd);
+		pb(deq_A, deq_B, cmd);
+	}
+	i = -1;
+	while (++i < len - 1)
+		pa(deq_A, deq_B, cmd);
+	if (deq_A->case_num == 1)
+		deq_A->case_num = 3;
 	return (1);
 }
 
@@ -214,6 +256,7 @@ void	divide_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 				info->cnt[1] += rb(deq_B, info->cmd);
 		}
 	}
+	reverse_stack(deq_A, deq_B, info);
 	//cnt[0] = ra
 	//cnt[1] = rb
 	//cnt[2] = pa
@@ -227,7 +270,7 @@ void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 	int	rb_cnt;
 	int	pb_cnt;
 
-	if (check_already_sorted(deq_A))
+	if (check_already_sorted(deq_A) || sorting_reverse(deq_A, deq_B, info->cmd, len))
 		return ;
 	if (len <= 3)
 	{
@@ -238,7 +281,6 @@ void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 	pre_sort(deq_A, len, &(info->piv));
 	printf("len big sml : %d %d %d\n", len, info->piv.big, info->piv.sml);
 	divide_A(deq_A, deq_B, info, len); //ra rb pb카운트
-	reverse_stack(deq_A, deq_B, info);
 	ra_cnt = info->cnt[0];
 	rb_cnt = info->cnt[1];
 	pb_cnt = info->cnt[3];
