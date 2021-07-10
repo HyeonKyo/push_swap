@@ -3,6 +3,22 @@
 #include "list.h"
 #include "push_swap.h"
 
+int		check_already_sorted(t_deque *deq)
+{
+	t_list	*cur;
+
+	if (deq == 0)
+		return (0);
+	cur = deq->top;
+	while (cur->next)
+	{
+		if (cur->data > cur->next->data)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
+}
+
 void	print_deq(t_deque *deq_A, t_deque *deq_B)
 {
 	t_list *cur;
@@ -45,8 +61,42 @@ void	print_deq(t_deque *deq_A, t_deque *deq_B)
 	}
 }
 
+int		find_max(int n1, int n2, int n3)
+{
+	if (n1 > n2)
+	{
+		if (n1 > n3)
+			return (n1);
+		else
+			return (n3);
+	}
+	else
+		if (n2 > n3)
+			return (n2);
+	return (n3);
+}
+
+void	real_three_number_sort(t_deque *deq_A, t_cmd_deq *cmd_list)
+{
+	int	n1;
+	int	n2;
+	int	n3;
+
+	n1 = deq_A->top->data;
+	n2 = deq_A->top->next->data;
+	n3 = deq_A->bot->data;
+	if (n1 == find_max(n1, n2, n3))
+		ra(deq_A, cmd_list);
+	else if (n2 == find_max(n1, n2, n3))
+		rra(deq_A, cmd_list);
+	if (deq_A->top->data > deq_A->top->next->data)
+		sa(deq_A, cmd_list);
+}
+
 void	except_sort(t_deque *deq_A, int len, t_cmd_deq *cmd_list)
 {
+	if (check_already_sorted(deq_A))
+		return ;
 	if (len == 1)
 		return ;
 	if (len == 2)
@@ -56,6 +106,8 @@ void	except_sort(t_deque *deq_A, int len, t_cmd_deq *cmd_list)
 	}
 	else
 	{
+		if (deq_A->size == 3)
+			real_three_number_sort(deq_A, cmd_list);
 		if (deq_A->top->data > deq_A->top->next->data)
 			sa(deq_A, cmd_list);
 		ra(deq_A, cmd_list);
@@ -70,6 +122,8 @@ void	except_sort(t_deque *deq_A, int len, t_cmd_deq *cmd_list)
 void	divide_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 {
 	ft_memset(info->cnt, 0, sizeof(int) * 4);
+	if (len <= 0)
+		return ;
 	while (len--)
 	{
 		if (deq_B->top->data < info->piv.sml)
@@ -145,6 +199,9 @@ void	B_to_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 
 void	divide_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 {
+	int	n;
+
+	n = len;
 	ft_memset(info->cnt, 0, sizeof(int) * 4);
 	while (len--)
 	{
@@ -153,7 +210,7 @@ void	divide_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 		else
 		{
 			info->cnt[3] += pb(deq_A, deq_B, info->cmd);
-			if (deq_B->top->data >= info->piv.sml)
+			if (deq_B->top->data >= info->piv.sml && n > 6)
 				info->cnt[1] += rb(deq_B, info->cmd);
 		}
 	}
@@ -170,6 +227,8 @@ void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 	int	rb_cnt;
 	int	pb_cnt;
 
+	if (check_already_sorted(deq_A))
+		return ;
 	if (len <= 3)
 	{
 		deq_A->case_num = 3;
@@ -177,14 +236,20 @@ void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 		return ;
 	}
 	pre_sort(deq_A, len, &(info->piv));
+	printf("len big sml : %d %d %d\n", len, info->piv.big, info->piv.sml);
 	divide_A(deq_A, deq_B, info, len); //ra rb pb카운트
 	reverse_stack(deq_A, deq_B, info);
 	ra_cnt = info->cnt[0];
 	rb_cnt = info->cnt[1];
 	pb_cnt = info->cnt[3];
 	A_to_B(deq_A, deq_B, info, ra_cnt);
-	B_to_A(deq_A, deq_B, info, rb_cnt);
-	B_to_A(deq_A, deq_B, info, pb_cnt - rb_cnt);
+	if (pb_cnt <= 3)
+		B_to_A(deq_A, deq_B, info, pb_cnt);
+	else
+	{
+		B_to_A(deq_A, deq_B, info, rb_cnt);
+		B_to_A(deq_A, deq_B, info, pb_cnt - rb_cnt);
+	}
 }
 
 // A_to_B(stack_A, stack_B, info, base)
@@ -214,16 +279,21 @@ void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 void	q_sort(t_deque *deq_A, t_deque *deq_B, t_info *info)
 {
 	A_to_B(deq_A, deq_B, info, deq_A->size);
-	print_deq(deq_A, deq_B);
+	//print_deq(deq_A, deq_B);
 }
 
 void	sort(t_deque *deq_A, t_deque *deq_B)
 {
 	t_info	info;
 
+	if (check_already_sorted(deq_A))
+		exit(0);
 	ft_memset(&info, 0, sizeof(t_info));
 	setup_info(&info);
 	q_sort(deq_A, deq_B, &info);
+	printf("cmd len : %d\n", info.cmd->size);
+	print_cmd(&info);
+	print_deq(deq_A, deq_B);
 	//optimizing_cmd();
 	//print_cmd(info.cmd);
 }

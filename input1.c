@@ -50,6 +50,8 @@ char	*merge_input(int ac, char **av)
 	char	*str;
 	char	*tmp;
 
+	if (ac == 2)
+		return (ft_strdup(av[1]));
 	i = 2;
 	str = ft_strjoin(av[1], av[2]);
 	while (++i < ac)

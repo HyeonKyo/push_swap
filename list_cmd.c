@@ -12,18 +12,20 @@
 
 #include "ft_type.h"
 #include "ft_utils.h"
+#include <stdio.h>
 
-char	*new_str(int size, const char *str)
+char	*new_str(int len, const char *str)
 {
 	int		i;
 	char	*new;
 
-	new = (char *)malloc(sizeof(size + 1));
+	new = (char *)malloc(sizeof(len + 1));
 	if (new == 0)
 		merror();
 	i = -1;
-	while (++i < size)
+	while (++i < len)
 		new[i] = str[i];
+	new[len] = 0;
 	return (new);
 }
 
@@ -42,6 +44,7 @@ void	add_command(int len, const char *str, t_cmd_deq *cmd_list)
 {
 	cmd_list->last->cmd = new_str(len, str);
 	cmd_list->last->next = create_cmd_list();
+	cmd_list->last = cmd_list->last->next;
 	cmd_list->size++;
 }
 

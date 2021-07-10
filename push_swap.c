@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	t_deque	*deq_B;
 	t_list	*cur;
 
-	if (ac <= 2)//ac = 2 -> 숫자 1개 들어옴 -> 아무 명령도 출력 x
+	if (ac <= 1)//ac = 2 -> 인자 1개 => "1 2 34" 이런식으로 여러개 들어올 수 있음.
 		return (1);
 	make_stack(ac, av, &deq_A, &deq_B);
 	//pre_sort(deq_A, deq_A->bot->data, &piv);

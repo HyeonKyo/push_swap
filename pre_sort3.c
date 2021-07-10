@@ -45,6 +45,12 @@ void	choose_pivot1(t_pivot *piv, t_sort *repo)
 		a++;
 	else if (b - a < c - b + 1 && b - 1 != a)
 		b--;
+	if (repo->size < 12)
+	{
+		b = c - 2;
+		if (a == b)
+			a--;
+	}
 	piv->sml = repo->arr[a];
 	piv->big = repo->arr[b];
 }

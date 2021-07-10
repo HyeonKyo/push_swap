@@ -60,6 +60,7 @@ void	pre_sort(t_deque *deq, int len, t_pivot *piv);
 t_sort	*make_repo(int len);
 
 //sort
+int		check_already_sorted(t_deque *deq);
 void	print_deq(t_deque *deq_A, t_deque *deq_B);
 void	except_sort(t_deque *deq_A, int size, t_cmd_deq *cmd_list);
 void	divide_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len);
@@ -69,5 +70,8 @@ void	divide_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len);
 void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len);
 void	q_sort(t_deque *deq_A, t_deque *deq_B, t_info *info);
 void	sort(t_deque *deq_A, t_deque *deq_B);
+
+//optimize
+void	print_cmd(t_info *info);
 
 #endif
