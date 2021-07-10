@@ -32,15 +32,15 @@ void	choose_pivot1(t_pivot *piv, t_sort *repo)
 	int	c;
 	int	tmp;
 
-	tmp = (repo->size - 1) % 3;
-	if (tmp == 0) 
-		a = (repo->size - 1) / 3;
-	else if (tmp == 1)
-		a = ((repo->size - 1) + 2) / 3;
-	else
-		a = ((repo->size - 1) + 1) / 3;
-	b = ((repo->size - 1) * 2) / 3;
 	c = repo->size - 1;
+	tmp = c % 3;
+	if (tmp == 0)
+		a = c / 3;
+	else if (tmp == 1)
+		a = (c + 2) / 3;
+	else
+		a = (c + 1) / 3;
+	b = (c * 2) / 3;
 	if (b - a > c - b + 1 && a + 1 != b)
 		a++;
 	else if (b - a < c - b + 1 && b - 1 != a)
@@ -55,9 +55,9 @@ void	choose_pivot2(t_pivot *piv, t_sort *repo)
 	int	b;
 	int	c;
 
-	a = (repo->size - 1) / 3;
-	b = ((repo->size - 1) * 2) / 3;
-	c = (repo->size - 1);
+	c = repo->size - 1;
+	a = c / 3;
+	b = (c * 2) / 3;
 	if (b - a > c - b + 1 && b - 1 != a)
 		b--;
 	else if (a - 1 < b - a && a + 1 != b)
@@ -73,15 +73,15 @@ void	choose_pivot3(t_pivot *piv, t_sort *repo)
 	int	c;
 	int	tmp;
 
-	a = (repo->size - 1) / 3;
-	tmp = ((repo->size - 1) * 2) % 3;
+	c = repo->size - 1;
+	a = c / 3;
+	tmp = (c * 2) % 3;
 	if (tmp == 0) 
-		b = (repo->size - 1) * 2 / 3;
+		b = c * 2 / 3;
 	else if (tmp == 1)
-		b = ((repo->size - 1) * 2 + 2) / 3;
+		b = (c * 2 + 2) / 3;
 	else
-		b = ((repo->size - 1) * 2 + 1) / 3;
-	c = (repo->size - 1);
+		b = (c * 2 + 1) / 3;
 	if (b - a > a - 1 && a + 1 != b)
 		a++;
 	if (b - a + 1 == c - b && b + 1 != c)
@@ -107,15 +107,14 @@ void	clear_repo(t_sort *repo)
 		free(repo);
 }
 
-void	pre_sort(t_deque *deq, int base, t_pivot *piv)
+void	pre_sort(t_deque *deq, int len, t_pivot *piv)
 {
 	int	max;
 	int	min;
-	int	len;
 	t_ll	bios;
 	t_sort	*repo;
 
-	len = check_stack(deq, base, &max, &min);
+	check_stack(deq, len, &max, &min);
 	repo = make_repo(len);
 	bios = 0;
 	if (min < 0)

@@ -62,23 +62,9 @@ typedef struct	s_queue
 
 typedef struct	s_sort
 {
-	int	size;
+	int		size;
 	t_ll	*arr;
 }				t_sort;
-
-//base
-typedef struct	s_base_list
-{
-	int	data;
-	struct	s_base_list	*next;
-	struct	s_base_list *prev;
-}				t_base_list;
-
-typedef struct	s_base
-{
-	int			last;
-	t_base_list	*top;
-}				t_base;
 
 //pivot
 typedef	struct	s_pivot
@@ -92,6 +78,6 @@ typedef	struct	s_info
 {
 	t_pivot		piv;
 	t_cmd_deq	*cmd;
-	t_base		*base;
+	int			cnt[4];
 }				t_info;
 #endif

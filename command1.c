@@ -47,12 +47,12 @@ void	ss(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 	add_command(2, "ss", cmd_list);
 }
 
-void	pa(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
+int	pa(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 {
 	t_list	*tmp;
 
 	if (deq_B->size <= 0)
-		return ;
+		return (0);
 	deq_A->top->prev = create_list();
 	tmp = deq_A->top;
 	deq_A->top = deq_A->top->prev;
@@ -62,14 +62,15 @@ void	pa(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 	(deq_A->size)++;
 	(deq_B->size)--;
 	add_command(2, "pa", cmd_list);
+	return (1);
 }
 
-void	pb(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
+int	pb(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 {
 	t_list	*tmp;
 
 	if (deq_A->size <= 0)
-		return ;
+		return (0);
 	if (deq_B->top == 0)
 	{
 		deq_B->top = create_list();
@@ -88,4 +89,5 @@ void	pb(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd_list)
 	(deq_B->size)++;
 	(deq_A->size)--;
 	add_command(2, "pb", cmd_list);
+	return (1);
 }

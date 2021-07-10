@@ -53,8 +53,5 @@ void	setup_info(t_info *info)
 	info->cmd->head = create_cmd_list();
 	info->cmd->last = info->cmd->head;
 	info->cmd->size = 0;
-	info->base = (t_base *)malloc(sizeof(t_base));
-	if (info->base == 0)
-		merror();
-	ft_memset(info->base, 0, sizeof(t_base));
+	ft_memset(info->cnt, 0, sizeof(int) * 4);
 }
