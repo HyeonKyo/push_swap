@@ -73,5 +73,5 @@ void	sort(t_deque *deq_A, t_deque *deq_B);
 
 //optimize
 void	print_cmd(t_info *info);
-
+int		optimize_command(t_cmd_deq *cmd);
 #endif

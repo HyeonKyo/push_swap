@@ -37,6 +37,7 @@ typedef struct	s_cmd_lst
 {
 	char	*cmd;
 	struct s_cmd_lst	*next;
+	struct s_cmd_lst	*prev;
 }				t_cmd_lst;
 
 typedef struct	s_cmd_deq

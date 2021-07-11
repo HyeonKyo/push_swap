@@ -44,6 +44,7 @@ void	add_command(int len, const char *str, t_cmd_deq *cmd_list)
 {
 	cmd_list->last->cmd = new_str(len, str);
 	cmd_list->last->next = create_cmd_list();
+	cmd_list->last->next->prev = cmd_list->last;
 	cmd_list->last = cmd_list->last->next;
 	cmd_list->size++;
 }

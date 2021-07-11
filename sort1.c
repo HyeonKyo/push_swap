@@ -19,15 +19,13 @@ int		check_already_sorted(t_deque *deq)
 	return (1);//정렬되있는 상태
 }
 
-int		check_reverse_sorted(t_deque *deq_A, int len)
+int		check_reverse_sorted(t_deque *deq, int len)
 {
 	int		i;
 	int		check_num;
 	t_list	*cur;
 
-	if (len < 6)
-		return (0);
-	cur = deq_A->top;
+	cur = deq->top;
 	check_num = cur->data;
 	i = -1;
 	while (++i < len - 1)
@@ -45,6 +43,8 @@ int		sorting_reverse(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd, int len)
 	int		i;
 	t_list	*cur;
 
+	if (len < 6)
+		return (0);
 	if (!check_reverse_sorted(deq_A, len))
 		return (0);
 	i = -1;
@@ -222,6 +222,12 @@ void	B_to_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 	int	pa_cnt;
 
 	i = -1;
+	if (check_reverse_sorted(deq_B, len))
+	{
+		while (++i < len)
+			pa(deq_A, deq_B, info->cmd);
+		return ;
+	}
 	if (len <= 3)
 	{
 		while (++i < len)
@@ -279,7 +285,6 @@ void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 		return ;
 	}
 	pre_sort(deq_A, len, &(info->piv));
-	printf("len big sml : %d %d %d\n", len, info->piv.big, info->piv.sml);
 	divide_A(deq_A, deq_B, info, len); //ra rb pb카운트
 	ra_cnt = info->cnt[0];
 	rb_cnt = info->cnt[1];
@@ -333,9 +338,11 @@ void	sort(t_deque *deq_A, t_deque *deq_B)
 	ft_memset(&info, 0, sizeof(t_info));
 	setup_info(&info);
 	q_sort(deq_A, deq_B, &info);
-	printf("cmd len : %d\n", info.cmd->size);
+	while (optimize_command(info.cmd))
+		;
 	print_cmd(&info);
-	print_deq(deq_A, deq_B);
+	//printf("deq size : %d\n", deq_A->size);
+	//printf("cmd len : %d\n", info.cmd->size);
 	//optimizing_cmd();
 	//print_cmd(info.cmd);
 }
