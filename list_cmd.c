@@ -49,13 +49,15 @@ void	add_command(int len, const char *str, t_cmd_deq *cmd_list)
 	cmd_list->size++;
 }
 
-void	setup_info(t_info *info)
+void	setup_info(t_info **info)
 {
-	info->cmd = (t_cmd_deq *)malloc(sizeof(t_cmd_deq));
-	if (info->cmd == 0)
+	*info = (t_info *)malloc(sizeof(t_info));
+	ft_memset(*info, 0, sizeof(t_info));
+	(*info)->cmd = (t_cmd_deq *)malloc(sizeof(t_cmd_deq));
+	if ((*info)->cmd == 0)
 		merror();
-	info->cmd->head = create_cmd_list();
-	info->cmd->last = info->cmd->head;
-	info->cmd->size = 0;
-	ft_memset(info->cnt, 0, sizeof(int) * 4);
+	(*info)->cmd->head = create_cmd_list();
+	(*info)->cmd->last = (*info)->cmd->head;
+	(*info)->cmd->size = 0;
+	ft_memset((*info)->cnt, 0, sizeof(int) * 4);
 }

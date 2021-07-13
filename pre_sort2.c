@@ -3,7 +3,7 @@
 #include "list.h"
 #include "push_swap.h"
 
-void	insert_queue(t_ll num, t_queue *queue[10], int q_num)
+void	push_queue(t_ll num, t_queue *queue[10], int q_num)
 {
 	t_qu_lst	*cur;
 
@@ -20,7 +20,7 @@ void	insert_queue(t_ll num, t_queue *queue[10], int q_num)
 	queue[q_num]->size++;
 }
 
-void	putin_data(t_deque *deq, t_sort *repo, t_ll bios)
+void	putin_data_in_array(t_deque *deq, t_sort *repo, t_ll bios)
 {
 	int	i;
 	t_list	*cur;
@@ -78,7 +78,7 @@ void	clear_queue(t_queue *queue[10])
 	}
 }
 
-void	pre_sorting(t_sort *repo, t_ll bios, int dg)
+void	pre_sorting(t_sort *repo, int dg)
 {
 	int	i;
 	int	last;
@@ -87,8 +87,8 @@ void	pre_sorting(t_sort *repo, t_ll bios, int dg)
 	i = -1;
 	while (++i < repo->size)
 	{
-		last = return_last_num(repo->arr[i], dg);
-		insert_queue(repo->arr[i], queue, last);
+		last = last_digit_num(repo->arr[i], dg);
+		push_queue(repo->arr[i], queue, last);
 	}
 	pull_queue(repo, queue);
 	clear_queue(queue);

@@ -30,7 +30,7 @@ void	vaild_input(char *argv)
 		error();
 }
 
-void	check_insert(int ac, char **argv)
+void	check_valid_argv(int ac, char **argv)
 {
 	int	i;
 
@@ -77,19 +77,19 @@ unsigned int	absol(int n)
 void	ps_atoi(int *idx, int sign, char *str, t_deque *deq)
 {
 	long long	num;
-	int			len;
+	int			digit_len;
 
 	num = 0;
-	len = 0;
+	digit_len = 0;
 	if (str[*idx] == 0)
 		error();
 	while (ft_isdigit(str[*idx]))
 	{
-		len++;
+		digit_len++;
 		num = num * 10 + (absol(str[(*idx)++]) - '0');
 	}
 	num = num * sign;
-	if (len > 10 || num < -2147483648 || num > 2147483647)
+	if (digit_len > 10 || num < INT_MIN || num > INT_MAX)
 		error();
 	fillin_deque(deq, (int)num);
 }

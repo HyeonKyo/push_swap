@@ -1,14 +1,12 @@
 #include "ft_type.h"
 #include "ft_utils.h"
-#include "list.h"
-#include "push_swap.h"
 
-void	check_stack(t_deque *deq, int len, int *max, int *min)
+void	search_stack(t_deque *deq, int len, int *max, int *min)
 {
 	t_list	*cur;
 
-	*max = -2147483648;
-	*min = 2147483647;
+	*max = INT_MIN;
+	*min = INT_MAX;
 	cur = deq->top;
 	while (len--)
 	{
@@ -20,7 +18,7 @@ void	check_stack(t_deque *deq, int len, int *max, int *min)
 	}
 }
 
-t_sort	*make_repo(int len)
+t_sort	*make_repository(int len)
 {
 	t_sort	*repo;
 
@@ -34,7 +32,7 @@ t_sort	*make_repo(int len)
 	return (repo);
 }
 
-int		find_digit(t_ll num)
+int		find_digit_len(t_ll num)
 {
 	int	digit;
 
@@ -47,7 +45,7 @@ int		find_digit(t_ll num)
 	return (digit);
 }
 
-int		return_last_num(long long n, int dg)
+int		last_digit_num(long long n, int dg)
 {
 	int	i;
 

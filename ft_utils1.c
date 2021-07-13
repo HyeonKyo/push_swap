@@ -12,14 +12,6 @@
 
 #include "ft_utils.h"
 
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
-}
-
 size_t	ft_strlen(const char *str)
 {
 	int	i;
@@ -75,4 +67,16 @@ char	*ft_strdup(const char *src)
 	while (++j <= i)
 		temp[j] = src[j];
 	return (temp);
+}
+
+int		ft_strcmp(char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	if (s1 == 0 || s2 == 0)
+		return (-1);
+	while (s1[i] == s2[i] && s1[i] && s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

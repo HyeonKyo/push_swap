@@ -17,11 +17,11 @@ void	radix_sort(t_deque *deq, t_sort *repo, t_ll bios, int max)
 	int	i;
 	int	digit;
 
-	digit = find_digit(bios + max);
-	putin_data(deq, repo, bios);
+	digit = find_digit_len(bios + max);
+	putin_data_in_array(deq, repo, bios);
 	i = 1;
 	while (i <= digit)
-		pre_sorting(repo, bios, i++);
+		pre_sorting(repo, i++);
 	before_bios(repo, bios);
 }
 
@@ -45,12 +45,12 @@ void	choose_pivot1(t_pivot *piv, t_sort *repo)
 		a++;
 	else if (b - a < c - b + 1 && b - 1 != a)
 		b--;
+	if (repo->size < 15)
+		b = c - 3;
 	if (repo->size < 12)
-	{
 		b = c - 2;
-		if (a == b)
-			a--;
-	}
+	if (a == b)
+		a--;
 	piv->sml = repo->arr[a];
 	piv->big = repo->arr[b];
 }
@@ -120,8 +120,8 @@ void	pre_sort(t_deque *deq, int len, t_pivot *piv)
 	t_ll	bios;
 	t_sort	*repo;
 
-	check_stack(deq, len, &max, &min);
-	repo = make_repo(len);
+	search_stack(deq, len, &max, &min);
+	repo = make_repository(len);
 	bios = 0;
 	if (min < 0)
 		bios = -1 * min;

@@ -1,14 +1,9 @@
 
-
+# ruby -e "puts (-50..49).to_a.shuffle.join(' ')"
 
 CNT=100
 LIMIT=700
-ARG=ruby -e "puts (0..100).to_a.shuffle.join(' ')"
-NUM=`./push_swap $ARG | wc -l`
-​
-while [ $NUM -lt $LIMIT ]
-do
+echo "$@"
+NUM=`./push_swap $@ | wc -l`
+
 echo $NUM
-ARG=ruby -e "puts (0..100).to_a.shuffle.join(' ')"
-NUM=`./push_swap $ARG | wc -l`
-done
