@@ -6,7 +6,7 @@
 /*   By: hyeonkki <hyeonkki@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 14:42:55 by hyeonkki          #+#    #+#             */
-/*   Updated: 2021/07/05 14:42:56 by hyeonkki         ###   ########.fr       */
+/*   Updated: 2021/07/15 22:39:21 by hyeonkki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 	info = q_sort(deq_A, deq_B);
 	while (optimize_command(info->cmd))
 		;
-	print_cmd(info);
+	//print_cmd(info);
 	//clear_info();
 	return (0);
 }
