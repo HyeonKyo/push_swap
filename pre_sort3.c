@@ -17,11 +17,11 @@ void	radix_sort(t_deque *deq, t_sort *repo, t_ll bios, int max)
 	int	i;
 	int	digit;
 
-	digit = find_digit(bios + max);
-	putin_data(deq, repo, bios);
+	digit = find_digit_len(bios + max);
+	putin_data_in_array(deq, repo, bios);
 	i = 1;
 	while (i <= digit)
-		pre_sorting(repo, bios, i++);
+		pre_sorting(repo, i++);
 	before_bios(repo, bios);
 }
 
@@ -32,19 +32,25 @@ void	choose_pivot1(t_pivot *piv, t_sort *repo)
 	int	c;
 	int	tmp;
 
-	tmp = (repo->size - 1) % 3;
-	if (tmp == 0) 
-		a = (repo->size - 1) / 3;
-	else if (tmp == 1)
-		a = ((repo->size - 1) + 2) / 3;
-	else
-		a = ((repo->size - 1) + 1) / 3;
-	b = ((repo->size - 1) * 2) / 3;
 	c = repo->size - 1;
+	tmp = c % 3;
+	if (tmp == 0)
+		a = c / 3;
+	else if (tmp == 1)
+		a = (c + 2) / 3;
+	else
+		a = (c + 1) / 3;
+	b = (c * 2) / 3;
 	if (b - a > c - b + 1 && a + 1 != b)
 		a++;
 	else if (b - a < c - b + 1 && b - 1 != a)
 		b--;
+	if (repo->size < 15)
+		b = c - 3;
+	if (repo->size < 12)
+		b = c - 2;
+	if (a == b)
+		a--;
 	piv->sml = repo->arr[a];
 	piv->big = repo->arr[b];
 }
@@ -55,9 +61,9 @@ void	choose_pivot2(t_pivot *piv, t_sort *repo)
 	int	b;
 	int	c;
 
-	a = (repo->size - 1) / 3;
-	b = ((repo->size - 1) * 2) / 3;
-	c = (repo->size - 1);
+	c = repo->size - 1;
+	a = c / 3;
+	b = (c * 2) / 3;
 	if (b - a > c - b + 1 && b - 1 != a)
 		b--;
 	else if (a - 1 < b - a && a + 1 != b)
@@ -73,15 +79,15 @@ void	choose_pivot3(t_pivot *piv, t_sort *repo)
 	int	c;
 	int	tmp;
 
-	a = (repo->size - 1) / 3;
-	tmp = ((repo->size - 1) * 2) % 3;
+	c = repo->size - 1;
+	a = c / 3;
+	tmp = (c * 2) % 3;
 	if (tmp == 0) 
-		b = (repo->size - 1) * 2 / 3;
+		b = c * 2 / 3;
 	else if (tmp == 1)
-		b = ((repo->size - 1) * 2 + 2) / 3;
+		b = (c * 2 + 2) / 3;
 	else
-		b = ((repo->size - 1) * 2 + 1) / 3;
-	c = (repo->size - 1);
+		b = (c * 2 + 1) / 3;
 	if (b - a > a - 1 && a + 1 != b)
 		a++;
 	if (b - a + 1 == c - b && b + 1 != c)
@@ -107,16 +113,15 @@ void	clear_repo(t_sort *repo)
 		free(repo);
 }
 
-void	pre_sort(t_deque *deq, int base, t_pivot *piv)
+void	pre_sort(t_deque *deq, int len, t_pivot *piv)
 {
 	int	max;
 	int	min;
-	int	len;
 	t_ll	bios;
 	t_sort	*repo;
 
-	len = check_stack(deq, base, &max, &min);
-	repo = make_repo(len);
+	search_stack(deq, len, &max, &min);
+	repo = make_repository(len);
 	bios = 0;
 	if (min < 0)
 		bios = -1 * min;

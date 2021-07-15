@@ -23,3 +23,22 @@ void	*ft_memset(void *ptr, int value, size_t num)
 		str[i++] = value;
 	return (ptr);
 }
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+void	error(void)
+{
+	write(2, "Error\n", 6);
+	exit(1);
+}
+
+void	merror(void)
+{
+	exit(2);
+}

@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print1.c                                        :+:      :+:    :+:   */
+/*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyeonkki <hyeonkki@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/05 14:42:24 by hyeonkki          #+#    #+#             */
-/*   Updated: 2021/07/05 14:42:24 by hyeonkki         ###   ########.fr       */
+/*   Created: 2021/07/05 14:42:31 by hyeonkki          #+#    #+#             */
+/*   Updated: 2021/07/05 14:42:32 by hyeonkki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_utils.h"
+#ifndef FT_UTILS_H
+# define FT_UTILS_H
+# include <unistd.h>
+# include <stdlib.h>
 
-void	error(void)
-{
-	write(2, "Error\n", 6);
-	exit(1);
-}
+//utils1
+int		ft_isdigit(int c);
+size_t	ft_strlen(const char *str);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *src);
 
-void	merror(void)
-{
-	exit(2);
-}
+//utils2
+void	*ft_memset(void *ptr, int value, size_t num);
+int		ft_strcmp(char *s1, const char *s2);
+void	error(void);
+void	merror(void);
+#endif

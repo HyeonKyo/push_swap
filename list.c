@@ -13,6 +13,7 @@
 #include "ft_type.h"
 #include "ft_utils.h"
 #include "list.h"
+#include "push_swap.h"
 #include <stdio.h>
 
 t_list	*create_list(void)
@@ -99,7 +100,8 @@ void	del_top_node(t_deque *deq)
 		return ;
 	deq->top = deq->top->next;
 	free(tmp);
-	deq->top->prev = 0;
+	if (deq->top)
+		deq->top->prev = 0;
 }
 
 void	del_bottom_node(t_deque *deq)
@@ -107,8 +109,10 @@ void	del_bottom_node(t_deque *deq)
 	t_list	*tmp;
 
 	tmp = deq->bot;
+	if (tmp == 0)
+		return ;
 	deq->bot = deq->bot->prev;
 	free(tmp);
-	deq->bot->next = 0;
-	return ;
+	if (deq->bot)
+		deq->bot->next = 0;
 }

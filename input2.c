@@ -29,7 +29,7 @@ t_deque	*insert_data(char *str)
 	return (deq);
 }
 
-t_deque	*check_dup_num(char *str)
+t_deque	*check_duplicated_num(char *str)
 {
 	int		ck_num;
 	t_list	*cur;
@@ -53,20 +53,23 @@ t_deque	*check_dup_num(char *str)
 	return (deq);
 }
 
-t_deque	*check_input(int ac, char **av)
+t_deque	*check_all_input(int ac, char **av)
 {
 	char	*str;
 	t_deque	*deq;
 
-	check_insert(ac, av);
+	check_valid_argv(ac, av);
 	str = merge_input(ac, av);
-	deq = check_dup_num(str);
+	deq = check_duplicated_num(str);
 	return (deq);
 }
 
-void	make_stack(int ac, char **av, t_deque **deq_A, t_deque **deq_B)
+t_deque	*make_stack(int ac, char **av, t_deque **deq_A)
 {
-	*deq_A = check_input(ac, av);
-	*deq_B = (t_deque *)malloc(sizeof(t_deque));
-	ft_memset(*deq_B, 0, sizeof(t_deque));
+	t_deque *deq_B;
+
+	*deq_A = check_all_input(ac, av);
+	deq_B = (t_deque *)malloc(sizeof(t_deque));
+	ft_memset(deq_B, 0, sizeof(t_deque));
+	return (deq_B);
 }
