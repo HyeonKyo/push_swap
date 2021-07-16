@@ -21,10 +21,13 @@ int		check_already_sorted(t_deque *deq)
 
 int		check_reverse_sorted(t_deque *deq, int len)
 {
+	//deq의 top부터 len만큼 역순인지 아닌지/ 역순이면 return 1
 	int		i;
 	int		check_num;
 	t_list	*cur;
 
+	if (deq->size > len)
+		return (0);
 	cur = deq->top;
 	check_num = cur->data;
 	i = -1;

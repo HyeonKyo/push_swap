@@ -42,7 +42,7 @@ void	print_deq(t_deque *deq_A, t_deque *deq_B)
 	printf("deq_A size : %d, deq_B size : %d\n", deq_A->size, deq_B->size);
 	while (size--)
 	{
-		printf("data : %-d  %-d\n", cur->data, cur2->data);
+		printf("data : %11d  %11d\n", cur->data, cur2->data);
 		cur = cur->next;
 		cur2 = cur2->next;
 		if (cur == 0 || cur2 == 0)
@@ -52,7 +52,7 @@ void	print_deq(t_deque *deq_A, t_deque *deq_B)
 	{
 		while (rest--)
 		{
-			printf("data : ' ' %-d\n", cur2->data);
+			printf("data : '%10c' %11d\n", ' ', cur2->data);
 			cur2 = cur2->next;
 		}
 	}
@@ -60,7 +60,7 @@ void	print_deq(t_deque *deq_A, t_deque *deq_B)
 	{
 		while (rest--)
 		{
-			printf("data : %-d ' '\n", cur->data);
+			printf("data : %11d '%10c'\n", cur->data, ' ');
 			cur = cur->next;
 		}
 	}
@@ -68,7 +68,7 @@ void	print_deq(t_deque *deq_A, t_deque *deq_B)
 
 void	except_sort(t_deque *deq_A, t_deque *deq_B, int len, t_cmd_deq *cmd)
 {
-	if (check_already_sorted(deq_A) || len == 1)
+	if (check_already_sorted(deq_A) || len <= 1)
 		return ;
 	if (len == 2)
 	{
