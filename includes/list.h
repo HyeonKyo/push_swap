@@ -30,5 +30,6 @@ char	*new_str(int len, const char *str);
 t_cmd_lst	*create_cmd_list(void);
 void	add_command(int len, const char *str, t_cmd_deq *cmd_list);
 void	setup_info(t_info **info);
+void	clear_info(t_info *info);
 
 #endif

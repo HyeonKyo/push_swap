@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 	info = q_sort(deq_A, deq_B);
 	while (optimize_command(info->cmd))
 		;
-	//print_cmd(info);
-	//clear_info();
+	print_cmd(info);
+	clear_info(info);
 	return (0);
 }

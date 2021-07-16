@@ -61,3 +61,18 @@ void	setup_info(t_info **info)
 	(*info)->cmd->size = 0;
 	ft_memset((*info)->cnt, 0, sizeof(int) * 4);
 }
+
+void	clear_info(t_info *info)
+{
+	t_cmd_lst	*cur;
+	t_cmd_lst	*tmp;
+
+	cur = info->cmd->head;
+	while (cur == 0)
+	{
+		tmp = cur;
+		cur = cur->next;
+		free(tmp);
+	}
+	free(info);
+}

@@ -70,14 +70,14 @@ t_info	*q_sort(t_deque *deq_A, t_deque *deq_B)
 		exit(0);
 	setup_info(&info);
 	A_to_B(deq_A, deq_B, info, deq_A->size);
-	if (check_already_sorted(deq_A))
-		printf("Success\n");
-	else
-	{
-		print_deq(deq_A, deq_B);
-		printf("deq size : %d\n", deq_A->size);
-		printf("cmd len : %d\n", info->cmd->size);
-	}
+	// if (check_already_sorted(deq_A))
+	// 	printf("Success\n");
+	// else
+	// {
+	// 	print_deq(deq_A, deq_B);
+	// 	printf("deq size : %d\n", deq_A->size);
+	// 	printf("cmd len : %d\n", info->cmd->size);
+	// }
 	clear_deque(deq_A);
 	clear_deque(deq_B);
 	return (info);
