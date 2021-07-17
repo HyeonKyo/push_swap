@@ -37,9 +37,8 @@ void	B_to_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 {
 	//초기 len = deq_A->size, 이후 = ra_cnt
-	int	ra_cnt;
-	int	rb_cnt;
-	int	pb_cnt;
+	int	big_B_to_A_cnt;
+	int	sml_B_to_A_cnt;
 
 	if (check_already_sorted(deq_A) || reverse_sort(deq_A, deq_B, info->cmd, len))
 		deq_A->case_num = 3;
@@ -53,12 +52,16 @@ void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 		pre_sort(deq_A, len, &(info->piv));
 		//printf("big sml : %d %d\n", info->piv.big, info->piv.sml);
 		divide_A(deq_A, deq_B, info, len); //ra rb pb카운트
-		ra_cnt = info->cnt[0];
-		rb_cnt = info->cnt[1];
-		pb_cnt = info->cnt[3];
-		A_to_B(deq_A, deq_B, info, ra_cnt);
-		B_to_A(deq_A, deq_B, info, rb_cnt);
-		B_to_A(deq_A, deq_B, info, pb_cnt - rb_cnt);
+		big_B_to_A_cnt = info->cnt[1];
+		sml_B_to_A_cnt = info->cnt[3] - info->cnt[1];
+		if (deq_A->case_num == 0)
+		{
+			swap_number(&big_B_to_A_cnt, &sml_B_to_A_cnt);
+			deq_A->case_num = 1;
+		}
+		A_to_B(deq_A, deq_B, info, info->cnt[0]);
+		B_to_A(deq_A, deq_B, info, big_B_to_A_cnt);
+		B_to_A(deq_A, deq_B, info, sml_B_to_A_cnt);
 	}
 }
 

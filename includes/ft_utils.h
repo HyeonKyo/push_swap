@@ -24,6 +24,7 @@ char	*ft_strdup(const char *src);
 //utils2
 void	*ft_memset(void *ptr, int value, size_t num);
 int		ft_strcmp(char *s1, const char *s2);
+void	swap_number(int *a, int *b);
 void	error(void);
 void	merror(void);
 #endif

@@ -38,7 +38,7 @@ t_deque	*create_deque(void)
 	deq->top = create_list();
 	deq->bot = 0;
 	deq->size = 1;
-	deq->case_num = 1;
+	deq->case_num = 0;
 	return (deq);
 }
 

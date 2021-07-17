@@ -32,6 +32,17 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
+void	swap_number(int *a, int *b)
+{
+	int	tmp;
+
+	if (!a || !b)
+		return ;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 void	error(void)
 {
 	write(2, "Error\n", 6);

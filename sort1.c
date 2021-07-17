@@ -102,20 +102,24 @@ void	reverse_stack(t_deque *deq_A, t_deque *deq_B, t_info *info)
 		i = info->cnt[1];
 		while (i--)
 			rrb(deq_B, info->cmd);
-		return ;
 	}
-	rest = absol(info->cnt[0] - info->cnt[1]);
-	com = small_num(info->cnt[0], info->cnt[1]);
-	i = -1;
-	while (++i < com)
-		rrr(deq_A, deq_B, info->cmd);
-	i = -1;
-	if (info->cnt[0] >= info->cnt[1])
-		while (++i < rest)
-			rra(deq_A, info->cmd);
+	else if (deq_A->case_num == 0)
+		return ;
 	else
-		while (++i < rest)
-			rrb(deq_B, info->cmd);
+	{
+		rest = absol(info->cnt[0] - info->cnt[1]);
+		com = small_num(info->cnt[0], info->cnt[1]);
+		i = -1;
+		while (++i < com)
+			rrr(deq_A, deq_B, info->cmd);
+		i = -1;
+		if (info->cnt[0] >= info->cnt[1])
+			while (++i < rest)
+				rra(deq_A, info->cmd);
+		else
+			while (++i < rest)
+				rrb(deq_B, info->cmd);
+	}
 }
 
 void	divide_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
@@ -139,9 +143,9 @@ void	divide_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 
 void	divide_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 {
-	int	n;
+	// int	n;
 
-	n = len;
+	// n = len;
 	ft_memset(info->cnt, 0, sizeof(int) * 4);
 	while (len--)
 	{
@@ -150,8 +154,14 @@ void	divide_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 		else
 		{
 			info->cnt[3] += pb(deq_A, deq_B, info->cmd);
-			if (deq_B->top->data >= info->piv.sml && n > 6)
-				info->cnt[1] += rb(deq_B, info->cmd);
+			if (deq_A->case_num == 0)//맨처음은 rrb를 안쓸 수 있음
+			{
+				if (deq_B->top->data < info->piv.sml)
+					info->cnt[1] += rb(deq_B, info->cmd);
+			}
+			else
+				if (deq_B->top->data >= info->piv.sml)//6보다 작으면 그냥 넘겨주기만 함, 왜? && n > 6
+					info->cnt[1] += rb(deq_B, info->cmd);
 		}
 	}
 	reverse_stack(deq_A, deq_B, info);
