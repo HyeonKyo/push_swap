@@ -128,7 +128,7 @@ void	pre_sort(t_deque *deq, int len, t_pivot *piv)
 	radix_sort(deq, repo, bios, max);
 	if (deq->case_num == 1)
 		choose_pivot1(piv, repo);
-	else if (deq->case_num == 2 || deq->case_num == 0)
+	else if (deq->case_num == 2)
 		choose_pivot2(piv, repo);
 	else
 		choose_pivot3(piv, repo);

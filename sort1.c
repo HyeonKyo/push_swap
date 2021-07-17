@@ -77,17 +77,17 @@ void	except_sort(t_deque *deq_A, t_deque *deq_B, int len, t_cmd_deq *cmd)
 	}
 	else if (len == 3)
 	{
-		if (deq_A->case_num == 1)
+		if (deq_A->case_num <= 1)
 			real_three_number_sort(deq_A, cmd);
 		else
 			other_three_number_sort(deq_A, cmd);
 	}
 	else
 	{
-		if (deq_A->case_num == 1)
+		if (deq_A->case_num <= 1)
 			real_four_number_sort(deq_A, deq_B, cmd);
-		else
-			other_four_number_sort(deq_A, deq_B, cmd);
+		// else
+		// 	other_four_number_sort(deq_A, deq_B, cmd);
 	}
 }
 
