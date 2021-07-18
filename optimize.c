@@ -87,21 +87,25 @@ void	optimizing_check1(t_cmd_deq *cmd, t_cmd_lst **cur)
 
 void	optimizing_check2(t_cmd_deq *cmd, t_cmd_lst **cur)
 {
-	char	*str;
+	char	*cur_str;
+	char	*next_str;
 
-	str = (*cur)->next->cmd;
-	if (!ft_strcmp((*cur)->cmd, "rra"))
+	cur_str = (*cur)->cmd;
+	// while (*cur && !ft_strcmp((*cur)->next->cmd, "rrr"))
+	// 	*cur = (*cur)->next;
+	next_str = (*cur)->next->cmd;
+	if (!ft_strcmp(cur_str, "rra"))
 	{
-		if (!ft_strcmp(str, "rrb"))
+		if (!ft_strcmp(next_str, "rrb"))
 			replace_command(cmd, cur, "rrr");
-		else if (!ft_strcmp(str, "ra"))
+		else if (!ft_strcmp(next_str, "ra"))
 			delete_command(cmd, cur);
 	}
-	else if (!ft_strcmp((*cur)->cmd, "rrb"))
+	else if (!ft_strcmp(cur_str, "rrb"))
 	{
-		if (!ft_strcmp(str, "rra"))
+		if (!ft_strcmp(next_str, "rra"))
 			replace_command(cmd, cur, "rrr");
-		else if (!ft_strcmp(str, "rb"))
+		else if (!ft_strcmp(next_str, "rb"))
 			delete_command(cmd, cur);
 	}
 }
@@ -131,6 +135,23 @@ void	optimizing_check3(t_cmd_deq *cmd, t_cmd_lst **cur)
 	}
 }
 
+void	optimizing_check4(t_cmd_deq *cmd, t_cmd_lst **cur)
+{
+	char	*str;
+
+	str = (*cur)->next->cmd;
+	if (!ft_strcmp((*cur)->cmd, "pa"))
+	{
+		if (!ft_strcmp(str, "pb"))
+			delete_command(cmd, cur);		
+	}
+	else if (!ft_strcmp((*cur)->cmd, "pb"))
+	{
+		if (!ft_strcmp(str, "pa"))
+			delete_command(cmd, cur);
+	}
+}
+
 int		optimize_command(t_cmd_deq *cmd)
 {
 	t_cmd_lst	*cur;
@@ -148,6 +169,8 @@ int		optimize_command(t_cmd_deq *cmd)
 			optimizing_check2(cmd, &cur);
 		else if (!ft_strcmp(cur->cmd, "rrr") || !ft_strcmp(cur->cmd, "rr"))
 			optimizing_check3(cmd, &cur);
+		else if (!ft_strcmp(cur->cmd, "pa") || !ft_strcmp(cur->cmd, "pb"))
+			optimizing_check4(cmd, &cur);
 		if (tmp == cur)
 			cur = cur->next;
 		else

@@ -68,6 +68,10 @@ void	choose_pivot2(t_pivot *piv, t_sort *repo)
 		b--;
 	else if (a - 1 < b - a && a + 1 != b)
 		a++;
+	if (repo->size < 12)
+		b = c - 2;
+	if (a == b)
+		a--;
 	piv->sml = repo->arr[a];
 	piv->big = repo->arr[b];
 }
