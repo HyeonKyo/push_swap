@@ -60,7 +60,7 @@ void	pre_sort(t_deque *deq, int len, t_pivot *piv);
 t_sort	*make_repository(int len);
 
 //sort1
-int		reverse_sort(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd, int len);
+int		reverse_sort(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd);
 void	print_deq(t_deque *deq_A, t_deque *deq_B);//지우기
 void	except_sort(t_deque *deq_A, t_deque *deq_B, int len, t_cmd_deq *cmd);
 void	reverse_stack(t_deque *deq_A, t_deque *deq_B, t_info *info);

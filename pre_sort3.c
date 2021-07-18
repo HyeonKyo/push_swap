@@ -88,10 +88,10 @@ void	choose_pivot3(t_pivot *piv, t_sort *repo)
 		b = (c * 2 + 2) / 3;
 	else
 		b = (c * 2 + 1) / 3;
-	if (b - a > a - 1 && a + 1 != b)
-		a++;
 	if (b - a + 1 == c - b && b + 1 != c)
 		b++;
+	if (b - a > a - 1 && a + 1 != b)
+		a++;
 	piv->sml = repo->arr[a];
 	piv->big = repo->arr[b];
 	//case3 = a > b >== c (b와 c가 같을 수 없을 땐 b가 하나 더 많게)
