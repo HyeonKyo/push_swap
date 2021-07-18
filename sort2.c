@@ -42,7 +42,7 @@ void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 
 	if (check_already_sorted(deq_A) || reverse_sort(deq_A, deq_B, info->cmd, len))
 		deq_A->case_num = 3;
-	else if (len <= 3)
+	else if (len <= 4)
 	{
 		except_sort(deq_A, deq_B, len, info->cmd);
 		deq_A->case_num = 3;
