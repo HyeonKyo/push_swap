@@ -3,13 +3,13 @@
 #include "list.h"
 #include "push_swap.h"
 
-int		reverse_sort(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd, int len)
+int		reverse_sort(t_deque *deq_A, t_deque *deq_B, t_cmd_deq *cmd)
 {
-	int		i;
+	int	i;
+	int	len;
 
-	if (len < 6)
-		return (0);
-	if (!check_reverse_sorted(deq_A, len))
+	len = deq_A->size;
+	if (deq_A->case_num > 1 || len < 6 || !check_reverse_sorted(deq_A, len))
 		return (0);
 	i = -1;
 	while (++i < len - 1)
@@ -143,9 +143,6 @@ void	divide_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 
 void	divide_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 {
-	// int	n;
-
-	// n = len;
 	ft_memset(info->cnt, 0, sizeof(int) * 4);
 	while (len--)
 	{

@@ -7,11 +7,8 @@ void	B_to_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 {
 	int	i;
 	int	rb_cnt;
-	int	pa_cnt;
 
 	i = -1;
-	pa_cnt = 0;
-	rb_cnt = 0;
 	if (check_reverse_sorted(deq_B, len))
 		while (++i < len)
 			pa(deq_A, deq_B, info->cmd);
@@ -26,8 +23,7 @@ void	B_to_A(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 		pre_sort(deq_B, len, &(info->piv));
 		divide_B(deq_A, deq_B, info, len);
 		rb_cnt = info->cnt[1];
-		pa_cnt = info->cnt[2];
-		A_to_B(deq_A, deq_B, info, pa_cnt);
+		A_to_B(deq_A, deq_B, info, info->cnt[2]);
 		while (++i < rb_cnt)
 			pa(deq_A, deq_B, info->cmd);
 		A_to_B(deq_A, deq_B, info, rb_cnt);
@@ -40,7 +36,7 @@ void	A_to_B(t_deque *deq_A, t_deque *deq_B, t_info *info, int len)
 	int	big_B_to_A_cnt;
 	int	sml_B_to_A_cnt;
 
-	if (check_already_sorted(deq_A) || reverse_sort(deq_A, deq_B, info->cmd, len))
+	if (check_already_sorted(deq_A) || reverse_sort(deq_A, deq_B, info->cmd))
 		deq_A->case_num = 3;
 	else if (len <= 4)
 	{
