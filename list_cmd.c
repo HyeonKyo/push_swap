@@ -49,16 +49,24 @@ void	add_command(int len, const char *str, t_cmd_deq *cmd_list)
 	cmd_list->size++;
 }
 
+t_cmd_deq	*create_cmd_deque(void)
+{
+	t_cmd_deq	*cmd;
+
+	cmd = (t_cmd_deq *)malloc(sizeof(t_cmd_deq));
+	if (cmd == 0)
+		merror();
+	cmd->head = create_cmd_list();
+	cmd->last = cmd->head;
+	cmd->size = 0;
+	return (cmd);
+}
+
 void	setup_info(t_info **info)
 {
 	*info = (t_info *)malloc(sizeof(t_info));
 	ft_memset(*info, 0, sizeof(t_info));
-	(*info)->cmd = (t_cmd_deq *)malloc(sizeof(t_cmd_deq));
-	if ((*info)->cmd == 0)
-		merror();
-	(*info)->cmd->head = create_cmd_list();
-	(*info)->cmd->last = (*info)->cmd->head;
-	(*info)->cmd->size = 0;
+	(*info)->cmd = create_cmd_deque();
 	ft_memset((*info)->cnt, 0, sizeof(int) * 4);
 }
 
